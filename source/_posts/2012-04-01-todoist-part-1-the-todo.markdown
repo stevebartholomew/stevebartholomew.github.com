@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Built on Objects Part 1: The Todo"
+title: "Todoist Part 1: The Todo"
 date: 2012-04-01 20:55
 comments: true
 categories: 
