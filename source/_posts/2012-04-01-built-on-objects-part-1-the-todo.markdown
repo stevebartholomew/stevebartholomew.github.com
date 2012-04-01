@@ -115,8 +115,12 @@ class Todo
 end
 {% endcodeblock %}
 
-There!  I can add todo then retrieve them later.
+I can now add todo and retrieve them later.
+
+**Next up:** I'll hook this up to a controller.
 
 You can [view this commit on github](https://github.com/stevebartholomew/todoist/tree/77c29e49ae38a6b8ce3be2254b3809b43349fc18)
 
-Next up: The controller
+Got a comment? Drop me a message on [twitter](http://twitter.com/sbartholomew).
+
+[Subscribe](/atom.xml) to hear about the next in the series. 
