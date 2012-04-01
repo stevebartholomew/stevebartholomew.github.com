@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew: Freelance Ruby Developer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2012-04-01T23:29:34+01:00</updated>
+  <updated>2012-04-01T23:30:47+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Todoist Part 1: The Todo]]></title>
-    <link href="http://stephenbartholomew.co.uk/blog/2012/04/01/built-on-objects-part-1-the-todo/"/>
+    <link href="http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo/"/>
     <updated>2012-04-01T20:55:00+01:00</updated>
-    <id>http://stephenbartholomew.co.uk/blog/2012/04/01/built-on-objects-part-1-the-todo</id>
+    <id>http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo</id>
     <content type="html"><![CDATA[<p>Todoist is a simple todo list application that I’ll be building from the ground up, focussing on the objects and interactions first.</p>
 
 <!-- more -->
