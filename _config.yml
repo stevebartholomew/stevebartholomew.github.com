@@ -16,7 +16,7 @@ description:
 date_format: "ordinal"
 
 # RSS / Email (optional) subscription links (change if using something like Feedburner)
-subscribe_rss: /atom.xml
+subscribe_rss: http://feeds.feedburner.com/StephenBartholomewFreelanceRubyDeveloper
 subscribe_email:
 # RSS feeds can list your email address if you like
 email:
@@ -93,7 +93,8 @@ disqus_short_name:
 disqus_show_comment_count: false
 
 # Google Analytics
-google_analytics_tracking_id:
+google_analytics_tracking_id: UA-30521926-1 
+
 
 # Facebook Like
 facebook_like: false
