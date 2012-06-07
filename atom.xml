@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew, Ruby Developer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2012-04-02T10:47:59+01:00</updated>
+  <updated>2012-06-07T22:30:14+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -12,6 +12,122 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Glass Bottles and the Law of Demeter]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2012/06/07/glass-bottles-and-the-law-of-demeter/"/>
+    <updated>2012-06-07T21:41:00+01:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2012/06/07/glass-bottles-and-the-law-of-demeter</id>
+    <content type="html"><![CDATA[<p>I can&#8217;t throw glass bottles in the bin anymore.  I&#8217;m not a dread-locked earth hippy but I&#8217;ve been recycling for so many years that it just feels&#8230;wrong.</p>
+
+<p>Good habits work best when they&#8217;re instinctual - like muscle memory.</p>
+
+<!-- more -->
+
+
+<p></p>
+
+<p>What if this looked weird to you?</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">organisation</span><span class="o">.</span><span class="n">subscription</span><span class="o">.</span><span class="n">memberships</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;re a Rails developer this kind of thing probably litters your code but anyone with a site of significant size knows what impact this has on your tests.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;creates a membership&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">o</span> <span class="o">=</span> <span class="no">Organisation</span><span class="o">.</span><span class="n">create</span>
+</span><span class='line'>  <span class="n">subscription</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">subscription</span><span class="o">.</span><span class="n">create</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># hit the database a few more times</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Anyone else tried TDDing with a 10 minute-long test suite?</p>
+
+<p>It also makes inject additional logic into process a real pain:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Membership</span>
+</span><span class='line'>  <span class="n">before_create</span> <span class="ss">:sadface</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So what if you instinctually <em>had</em> to abstract that interface - because chaining methods just feels wrong:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">organisation</span><span class="o">.</span><span class="n">create_membership</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You only have to test the logic within the object you&#8217;re interested in. If the connections to other objects are only one level too, simple stubbing is all you need:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;creates a membership&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">o</span> <span class="o">=</span> <span class="no">Organisation</span><span class="o">.</span><span class="n">build</span>
+</span><span class='line'>  <span class="n">subscription</span> <span class="o">=</span> <span class="n">stub</span>
+</span><span class='line'>  <span class="n">subscription</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:create_membership</span><span class="p">)</span><span class="o">.</span><span class="n">and_return</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">o</span><span class="o">.</span><span class="n">stub</span><span class="p">(</span><span class="n">subscription</span><span class="p">:</span> <span class="n">subscription</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">o</span><span class="o">.</span><span class="n">create_membership</span><span class="p">(</span><span class="n">stub</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Injecting logic becomes trival and remains in the right place.  It also means the top-level interface to <code>Organisation</code> stays untouched, regardless of what happens futher down the logic chain.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Subscription</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">create_membership</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">happy_face</span>
+</span><span class='line'>    <span class="n">memberships</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The thinking here is nothing new and is only a shallow implementation of a deeper concept, but small habits can reap big rewards as your application grows.</p>
+
+<h2>Key Points</h2>
+
+<ul>
+<li>Consider the entry points into the objects you create</li>
+<li>You shouldn&#8217;t have to poke into objects that aren&#8217;t directly connected an object</li>
+<li>Testing first will help with this - if you&#8217;re creating a load of objects just test one line of logic in a method - you should hear alarm bells</li>
+</ul>
+
+
+<h2>Further Reading</h2>
+
+<ul>
+<li><a href="http://objectsonrails.com/">Objects on Rails</a></li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Todoist Part 1: The Todo]]></title>
