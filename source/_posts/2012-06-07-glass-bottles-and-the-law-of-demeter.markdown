@@ -42,7 +42,7 @@ end
 So what if you instinctually *had* to abstract that interface - because chaining methods just feels wrong:
 
 {% codeblock lang:ruby %}
-organisation.create_membership(user)
+organisation.issue_membership(user)
 {% endcodeblock %}
 
 You only have to test the logic within the object you're interested in. If the connections to other objects are only one level too, simple stubbing is all you need:
@@ -51,10 +51,10 @@ You only have to test the logic within the object you're interested in. If the c
 it "creates a membership" do
   o = Organisation.build
   subscription = stub
-  subscription.should_receive(:create_membership).and_return(true)
+  subscription.should_receive(:issue_membership).and_return(true)
   o.stub(subscription: subscription)
 
-  o.create_membership(stub)
+  o.issue_membership(stub)
 end
 {% endcodeblock %}
 
@@ -62,7 +62,7 @@ Injecting logic becomes trival and remains in the right place.  It also means th
 
 {% codeblock lang:ruby %}
 class Subscription
-  def create_membership(user)
+  def issue_membership(user)
     happy_face
     memberships.create(user_id: user.id)
   end
