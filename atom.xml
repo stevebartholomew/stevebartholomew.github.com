@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew, Ruby Developer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2012-06-07T22:30:14+01:00</updated>
+  <updated>2012-06-08T09:31:08+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -67,7 +67,7 @@
 <p>So what if you instinctually <em>had</em> to abstract that interface - because chaining methods just feels wrong:</p>
 
 <figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">organisation</span><span class="o">.</span><span class="n">create_membership</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">organisation</span><span class="o">.</span><span class="n">issue_membership</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 </span></code></pre></td></tr></table></div></figure>
 
 
@@ -84,10 +84,10 @@
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;creates a membership&quot;</span> <span class="k">do</span>
 </span><span class='line'>  <span class="n">o</span> <span class="o">=</span> <span class="no">Organisation</span><span class="o">.</span><span class="n">build</span>
 </span><span class='line'>  <span class="n">subscription</span> <span class="o">=</span> <span class="n">stub</span>
-</span><span class='line'>  <span class="n">subscription</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:create_membership</span><span class="p">)</span><span class="o">.</span><span class="n">and_return</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">subscription</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:issue_membership</span><span class="p">)</span><span class="o">.</span><span class="n">and_return</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
 </span><span class='line'>  <span class="n">o</span><span class="o">.</span><span class="n">stub</span><span class="p">(</span><span class="n">subscription</span><span class="p">:</span> <span class="n">subscription</span><span class="p">)</span>
 </span><span class='line'>
-</span><span class='line'>  <span class="n">o</span><span class="o">.</span><span class="n">create_membership</span><span class="p">(</span><span class="n">stub</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">o</span><span class="o">.</span><span class="n">issue_membership</span><span class="p">(</span><span class="n">stub</span><span class="p">)</span>
 </span><span class='line'><span class="k">end</span>
 </span></code></pre></td></tr></table></div></figure>
 
@@ -101,7 +101,7 @@
 <span class='line-number'>5</span>
 <span class='line-number'>6</span>
 </pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Subscription</span>
-</span><span class='line'>  <span class="k">def</span> <span class="nf">create_membership</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">issue_membership</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
 </span><span class='line'>    <span class="n">happy_face</span>
 </span><span class='line'>    <span class="n">memberships</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
 </span><span class='line'>  <span class="k">end</span>
