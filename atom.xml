@@ -1,0 +1,325 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Stephen Bartholomew, Ruby Developer]]></title>
+  <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
+  <link href="http://stephenbartholomew.co.uk/"/>
+  <updated>2012-06-08T09:31:08+01:00</updated>
+  <id>http://stephenbartholomew.co.uk/</id>
+  <author>
+    <name><![CDATA[Stephen Bartholomew]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Glass Bottles and the Law of Demeter]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2012/06/07/glass-bottles-and-the-law-of-demeter/"/>
+    <updated>2012-06-07T21:41:00+01:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2012/06/07/glass-bottles-and-the-law-of-demeter</id>
+    <content type="html"><![CDATA[<p>I can&#8217;t throw glass bottles in the bin anymore.  I&#8217;m not a dread-locked earth hippy but I&#8217;ve been recycling for so many years that it just feels&#8230;wrong.</p>
+
+<p>Good habits work best when they&#8217;re instinctual - like muscle memory.</p>
+
+<!-- more -->
+
+
+<p></p>
+
+<p>What if this looked weird to you?</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">organisation</span><span class="o">.</span><span class="n">subscription</span><span class="o">.</span><span class="n">memberships</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>If you&#8217;re a Rails developer this kind of thing probably litters your code but anyone with a site of significant size knows what impact this has on your tests.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;creates a membership&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">o</span> <span class="o">=</span> <span class="no">Organisation</span><span class="o">.</span><span class="n">create</span>
+</span><span class='line'>  <span class="n">subscription</span> <span class="o">=</span> <span class="n">o</span><span class="o">.</span><span class="n">subscription</span><span class="o">.</span><span class="n">create</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="c1"># hit the database a few more times</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Anyone else tried TDDing with a 10 minute-long test suite?</p>
+
+<p>It also makes inject additional logic into process a real pain:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Membership</span>
+</span><span class='line'>  <span class="n">before_create</span> <span class="ss">:sadface</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>So what if you instinctually <em>had</em> to abstract that interface - because chaining methods just feels wrong:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">organisation</span><span class="o">.</span><span class="n">issue_membership</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You only have to test the logic within the object you&#8217;re interested in. If the connections to other objects are only one level too, simple stubbing is all you need:</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;creates a membership&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">o</span> <span class="o">=</span> <span class="no">Organisation</span><span class="o">.</span><span class="n">build</span>
+</span><span class='line'>  <span class="n">subscription</span> <span class="o">=</span> <span class="n">stub</span>
+</span><span class='line'>  <span class="n">subscription</span><span class="o">.</span><span class="n">should_receive</span><span class="p">(</span><span class="ss">:issue_membership</span><span class="p">)</span><span class="o">.</span><span class="n">and_return</span><span class="p">(</span><span class="kp">true</span><span class="p">)</span>
+</span><span class='line'>  <span class="n">o</span><span class="o">.</span><span class="n">stub</span><span class="p">(</span><span class="n">subscription</span><span class="p">:</span> <span class="n">subscription</span><span class="p">)</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="n">o</span><span class="o">.</span><span class="n">issue_membership</span><span class="p">(</span><span class="n">stub</span><span class="p">)</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Injecting logic becomes trival and remains in the right place.  It also means the top-level interface to <code>Organisation</code> stays untouched, regardless of what happens futher down the logic chain.</p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Subscription</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">issue_membership</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">happy_face</span>
+</span><span class='line'>    <span class="n">memberships</span><span class="o">.</span><span class="n">create</span><span class="p">(</span><span class="n">user_id</span><span class="p">:</span> <span class="n">user</span><span class="o">.</span><span class="n">id</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The thinking here is nothing new and is only a shallow implementation of a deeper concept, but small habits can reap big rewards as your application grows.</p>
+
+<h2>Key Points</h2>
+
+<ul>
+<li>Consider the entry points into the objects you create</li>
+<li>You shouldn&#8217;t have to poke into objects that aren&#8217;t directly connected an object</li>
+<li>Testing first will help with this - if you&#8217;re creating a load of objects just test one line of logic in a method - you should hear alarm bells</li>
+</ul>
+
+
+<h2>Further Reading</h2>
+
+<ul>
+<li><a href="http://objectsonrails.com/">Objects on Rails</a></li>
+</ul>
+
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Todoist Part 1: The Todo]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo/"/>
+    <updated>2012-04-01T20:55:00+01:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo</id>
+    <content type="html"><![CDATA[<p>Todoist is a simple todo list application that I’ll be building from the ground up, focussing on the objects and interactions first.</p>
+
+<!-- more -->
+
+
+<p>I’ll be using Ruby 1.9.3, Rails 3.2 and Rspec with Capybara for testing.</p>
+
+<h2>Feature #1: Adding a Todo</h2>
+
+<h3>An integration test</h3>
+
+<p>The first thing I do is create a test explaining how I as a user want to interact with the application:</p>
+
+<p><em>spec/integration/todos_integration_spec.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;spec_helper&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="s2">&quot;Todoist&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">context</span> <span class="s2">&quot;creating a todo&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;provides a form to create a new todo&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">visit</span> <span class="s2">&quot;/&quot;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">fill_in</span> <span class="s2">&quot;todo[body]&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Just something I need to do&quot;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">click_button</span> <span class="s2">&quot;Save&quot;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Added&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This wont pass and there’s a lot that needs to be hooked up for it to work so I’m going to forget about it for the moment.</p>
+
+<p>The Todo class
+My feature is ‘Adding a Todo’ so the first thing I’ll do is make a spec for a class called ‘Todo’ and a method called ‘add’:</p>
+
+<p><em>spec/models/todo_spec.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">require_relative</span> <span class="err">‘</span><span class="o">.</span><span class="n">.</span><span class="o">/.</span><span class="n">.</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">todo</span><span class="err">’</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="no">Todo</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;adds a new todo item&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;Something I have to do&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">task</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">todo</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="n">task</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Getting this to pass is straight forward:</p>
+
+<p><em>app/models/todo.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Todo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@attributes</span> <span class="o">=</span> <span class="n">attributes</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">task</span>
+</span><span class='line'>    <span class="vi">@attributes</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:task</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="kp">new</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More than one object
+A single instance on its own isn’t particularly useful though.  I’ll add storage and retrieval:</p>
+
+<p><em>spec/models/todo_spec.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;gets all todos&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="s2">&quot;Something&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="no">Todo</span><span class="o">.</span><span class="n">get_all_todos</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="n">todo</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And my Todo class becomes:</p>
+
+<p><em>app/models/todo.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Todo</span>
+</span><span class='line'>  <span class="vc">@@_todos</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@attributes</span> <span class="o">=</span> <span class="n">attributes</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">task</span>
+</span><span class='line'>    <span class="vi">@attributes</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:task</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">todo</span> <span class="o">=</span> <span class="kp">new</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="vc">@@_todos</span> <span class="o">&lt;&lt;</span> <span class="n">todo</span>
+</span><span class='line'>    <span class="n">todo</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">get_all_todos</span>
+</span><span class='line'>    <span class="vc">@@_todos</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I can now add todo and retrieve them later.</p>
+
+<p><strong>Next up:</strong> I&#8217;ll hook this up to a controller.</p>
+
+<p>You can <a href="https://github.com/stevebartholomew/todoist/tree/77c29e49ae38a6b8ce3be2254b3809b43349fc18">view this commit on github</a></p>
+
+<p>Got a comment? Drop me a message on <a href="http://twitter.com/sbartholomew">twitter</a>.</p>
+
+<p><a href="http://stephenbartholomew.co.uk/atom.xml">Subscribe</a> to hear about the next in the series.</p>
+]]></content>
+  </entry>
+  
+</feed>

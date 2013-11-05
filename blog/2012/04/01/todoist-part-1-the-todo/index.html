@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Todoist Part 1: The Todo - Stephen Bartholomew, Ruby Developer</title>
+  <meta name="author" content="Stephen Bartholomew">
+
+  
+  <meta name="description" content="Todoist is a simple todo list application that I’ll be building from the ground up, focussing on the objects and interactions first. I’ll be using &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/StephenBartholomewFreelanceRubyDeveloper" rel="alternate" title="Stephen Bartholomew, Ruby Developer" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30521926-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://twitter.com/sbartholomew" target="_new">Twitter</a></li>
+  <li><a href="http://github.com/stevebartholomew" target="_new">Github</a></li>
+  <li><a href="http://feeds.feedburner.com/StephenBartholomewFreelanceRubyDeveloper" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  
+    <li><a href="/">&laquo; Stephen Bartholomew</a></li>
+  
+  <li><a href="/blog">Blog</a></li>
+  <li><a href="/about">About</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Todoist Part 1: The Todo</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-01T20:55:00+01:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>Todoist is a simple todo list application that I’ll be building from the ground up, focussing on the objects and interactions first.</p>
+
+<!-- more -->
+
+
+<p>I’ll be using Ruby 1.9.3, Rails 3.2 and Rspec with Capybara for testing.</p>
+
+<h2>Feature #1: Adding a Todo</h2>
+
+<h3>An integration test</h3>
+
+<p>The first thing I do is create a test explaining how I as a user want to interact with the application:</p>
+
+<p><em>spec/integration/todos_integration_spec.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="nb">require</span> <span class="s2">&quot;spec_helper&quot;</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="s2">&quot;Todoist&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">context</span> <span class="s2">&quot;creating a todo&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">it</span> <span class="s2">&quot;provides a form to create a new todo&quot;</span> <span class="k">do</span>
+</span><span class='line'>      <span class="n">visit</span> <span class="s2">&quot;/&quot;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">fill_in</span> <span class="s2">&quot;todo[body]&quot;</span><span class="p">,</span> <span class="ss">:with</span> <span class="o">=&gt;</span> <span class="s2">&quot;Just something I need to do&quot;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">click_button</span> <span class="s2">&quot;Save&quot;</span>
+</span><span class='line'>
+</span><span class='line'>      <span class="n">page</span><span class="o">.</span><span class="n">should</span> <span class="n">have_content</span><span class="p">(</span><span class="s2">&quot;Added&quot;</span><span class="p">)</span>
+</span><span class='line'>    <span class="k">end</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This wont pass and there’s a lot that needs to be hooked up for it to work so I’m going to forget about it for the moment.</p>
+
+<p>The Todo class
+My feature is ‘Adding a Todo’ so the first thing I’ll do is make a spec for a class called ‘Todo’ and a method called ‘add’:</p>
+
+<p><em>spec/models/todo_spec.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">require_relative</span> <span class="err">‘</span><span class="o">.</span><span class="n">.</span><span class="o">/.</span><span class="n">.</span><span class="o">/</span><span class="n">app</span><span class="o">/</span><span class="n">models</span><span class="o">/</span><span class="n">todo</span><span class="err">’</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">describe</span> <span class="no">Todo</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">it</span> <span class="s2">&quot;adds a new todo item&quot;</span> <span class="k">do</span>
+</span><span class='line'>    <span class="n">task</span> <span class="o">=</span> <span class="s2">&quot;Something I have to do&quot;</span>
+</span><span class='line'>
+</span><span class='line'>    <span class="n">todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="n">task</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">todo</span><span class="o">.</span><span class="n">task</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="n">task</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Getting this to pass is straight forward:</p>
+
+<p><em>app/models/todo.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Todo</span>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@attributes</span> <span class="o">=</span> <span class="n">attributes</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">task</span>
+</span><span class='line'>    <span class="vi">@attributes</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:task</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="kp">new</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>More than one object
+A single instance on its own isn’t particularly useful though.  I’ll add storage and retrieval:</p>
+
+<p><em>spec/models/todo_spec.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="n">it</span> <span class="s2">&quot;gets all todos&quot;</span> <span class="k">do</span>
+</span><span class='line'>  <span class="n">todo</span> <span class="o">=</span> <span class="no">Todo</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">task</span><span class="p">:</span> <span class="s2">&quot;Something&quot;</span><span class="p">)</span>
+</span><span class='line'>  <span class="no">Todo</span><span class="o">.</span><span class="n">get_all_todos</span><span class="o">.</span><span class="n">last</span><span class="o">.</span><span class="n">should</span> <span class="o">==</span> <span class="n">todo</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>And my Todo class becomes:</p>
+
+<p><em>app/models/todo.rb:</em></p>
+
+<figure class='code'> <div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+</pre></td><td class='code'><pre><code class='ruby'><span class='line'><span class="k">class</span> <span class="nc">Todo</span>
+</span><span class='line'>  <span class="vc">@@_todos</span> <span class="o">=</span> <span class="o">[]</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">initialize</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="vi">@attributes</span> <span class="o">=</span> <span class="n">attributes</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nf">task</span>
+</span><span class='line'>    <span class="vi">@attributes</span><span class="o">.</span><span class="n">fetch</span><span class="p">(</span><span class="ss">:task</span><span class="p">)</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">add</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="n">todo</span> <span class="o">=</span> <span class="kp">new</span><span class="p">(</span><span class="n">attributes</span><span class="p">)</span>
+</span><span class='line'>    <span class="vc">@@_todos</span> <span class="o">&lt;&lt;</span> <span class="n">todo</span>
+</span><span class='line'>    <span class="n">todo</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'>
+</span><span class='line'>  <span class="k">def</span> <span class="nc">self</span><span class="o">.</span><span class="nf">get_all_todos</span>
+</span><span class='line'>    <span class="vc">@@_todos</span>
+</span><span class='line'>  <span class="k">end</span>
+</span><span class='line'><span class="k">end</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I can now add todo and retrieve them later.</p>
+
+<p><strong>Next up:</strong> I&#8217;ll hook this up to a controller.</p>
+
+<p>You can <a href="https://github.com/stevebartholomew/todoist/tree/77c29e49ae38a6b8ce3be2254b3809b43349fc18">view this commit on github</a></p>
+
+<p>Got a comment? Drop me a message on <a href="http://twitter.com/sbartholomew">twitter</a>.</p>
+
+<p><a href="/atom.xml">Subscribe</a> to hear about the next in the series.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Stephen Bartholomew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-04-01T20:55:00+01:00" pubdate data-updated="true">Apr 1<span>st</span>, 2012</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo/" data-via="sbartholomew" data-counturl="http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/06/07/glass-bottles-and-the-law-of-demeter/" title="Next Post: Glass Bottles and the Law of Demeter">Glass Bottles and the Law of Demeter &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2012 - Stephen Bartholomew -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'stephenbartholomew';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo/';
+        var disqus_url = 'http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
