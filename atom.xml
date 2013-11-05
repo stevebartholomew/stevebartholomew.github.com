@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew, Ruby Developer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2012-06-08T09:31:08+01:00</updated>
+  <updated>2013-11-05T22:05:01+00:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -12,6 +12,126 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Building SBGauge]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2013/11/05/building-sbgauge/"/>
+    <updated>2013-11-05T17:59:00+00:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2013/11/05/building-sbgauge</id>
+    <content type="html"><![CDATA[<p>I built <code>SBGauge</code> as part of <a href="http://www.groovecoachapp.com">GrooveCoach</a> as a way to indicate which &#8216;level&#8217; the user was on. When you tapped &#8216;+&#8217; or &#8216;-&#8217; the gauge changed accordingly. As part of developing that app I was keen to open source anything I could.</p>
+
+<p>Given the flexibility of this simple library, I thought it would make an interesting code walkthrough.</p>
+
+<!-- more -->
+
+
+<h2>Drawing the Gauge</h2>
+
+<p><code>SBGauge</code> consists of two <code>CAShapeLayer</code>s: the animating gauge itself and the &#8216;track&#8217; underneath.  The <code>draw</code> method simply creates two circles with different colors and adds them to the view&#8217;s backing layer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">gaugeLayer</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">drawCircleLayer:</span><span class="n">self</span><span class="p">.</span><span class="n">gaugeColor</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">CAShapeLayer</span> <span class="o">*</span><span class="n">trackLayer</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">drawCircleLayer:</span><span class="n">self</span><span class="p">.</span><span class="n">trackColor</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">layer</span> <span class="nl">addSublayer:</span><span class="n">trackLayer</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">layer</span> <span class="nl">addSublayer:</span><span class="n">gaugeLayer</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The circles are drawn by the <code>drawCircleLayer:(UIColor *)color</code> method in <code>SBGaugeView</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'>  <span class="n">circleLayer</span><span class="p">.</span><span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">CGRectInset</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">,</span> <span class="n">inset</span><span class="p">,</span> <span class="n">inset</span><span class="p">)</span>
+</span><span class='line'>                                                <span class="nl">cornerRadius:</span><span class="n">radius</span><span class="o">-</span><span class="n">inset</span><span class="p">].</span><span class="n">CGPath</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using <code>CGRectInset</code> means we draw <em>within</em> the view itself, not on the outside. This is especially if you&#8217;re working in interface builder - the gauge shouldn&#8217;t bust out of the frame you create for the view.</p>
+
+<h2>Context</h2>
+
+<p><code>SBGaugeContext</code> is responsible for calculating how big the segments will be and keeping track of the current &#8216;step&#8217;.  It is initialized with the number of segments:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">gauge</span> <span class="o">=</span> <span class="p">[[</span><span class="n">SBGaugeContext</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithSegments:</span><span class="n">self</span><span class="p">.</span><span class="n">segments</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you tell <code>SBGauge</code> to <code>stepUp</code>, the current <code>SBGaugeContext</code> will figure out what the current &#8216;step&#8217; should now be. <code>SBGauge</code> will then draw based on this new context.</p>
+
+<p>This decouples the logic surrounding step calculations from the drawing of the view itself.</p>
+
+<h2>Animating</h2>
+
+<p>When the view is redrawn, a <code>CABasicAnimation</code> is created to animate from the previous gauge step to the current step. <code>animateProgress</code> uses the gauge layer&#8217;s &#8216;strokeEnd&#8217; animate the length of the gauge:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="c1">// setup a basic animation using strokeEnd</span>
+</span><span class='line'><span class="n">CABasicAnimation</span> <span class="o">*</span><span class="n">drawAnimation</span> <span class="o">=</span> <span class="p">[</span><span class="n">CABasicAnimation</span> <span class="nl">animationWithKeyPath:</span><span class="s">@&quot;strokeEnd&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">duration</span>            <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">repeatCount</span>         <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">removedOnCompletion</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// set the from/to values based on the user&#39;s previous &#39;step&#39; &amp; the current one</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">fromValue</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="n">gauge</span><span class="p">.</span><span class="n">previous</span><span class="p">];</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">toValue</span>   <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="n">gauge</span><span class="p">.</span><span class="n">value</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// set how the animation should look</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">timingFunction</span> <span class="o">=</span> <span class="p">[</span><span class="n">CAMediaTimingFunction</span> <span class="nl">functionWithName:</span><span class="n">kCAMediaTimingFunctionEaseIn</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// finally apply the animation to the gauge layer</span>
+</span><span class='line'><span class="p">[</span><span class="n">gaugeLayer</span> <span class="nl">addAnimation:</span><span class="n">drawAnimation</span> <span class="nl">forKey:</span><span class="nb">nil</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You&#8217;ll see that <code>SBGaugeContext</code> handles the calculation of the value itself.</p>
+
+<h2>Style</h2>
+
+<p><code>SBGauge</code> doesn&#8217;t have any additional built in &#8216;looks&#8217; but by simply setting the <code>width</code> property, a number of different styles can be achieved.</p>
+
+<p>The size of the gauge itself is calcuated based on the containing frame (plus some hardcoded tweaking):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">CGFloat</span> <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">MIN</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">40</span><span class="p">;</span>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">inset</span>  <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This makes it possible to get at least an idea of the size of the view in interface builder.</p>
+
+<hr/>
+
+
+<p>That&#8217;s really all there is to it!</p>
+
+<p>I&#8217;ve since experimented with driving the guage using a large number of steps and an <code>NSTimer</code> which find in the project&#8217;s <a href="http://www.github.com/stevebartholomew/SBGauge/">README</a>.</p>
+
+<p><a href="http://www.github.com/stevebartholomew/SBGauge">Check it out on Github</a> - I&#8217;d love your feedback.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Glass Bottles and the Law of Demeter]]></title>

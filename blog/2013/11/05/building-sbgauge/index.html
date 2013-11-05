@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Building SBGauge - Stephen Bartholomew, Ruby Developer</title>
+  <meta name="author" content="Stephen Bartholomew">
+
+  
+  <meta name="description" content="I built SBGauge as part of GrooveCoach as a way to indicate which &#8216;level&#8217; the user was on. When you tapped &#8216;+&#8217; or &#8216;-&# &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://stephenbartholomew.co.uk/blog/2013/11/05/building-sbgauge">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="/javascripts/ender.js"></script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <link href="http://feeds.feedburner.com/StephenBartholomewFreelanceRubyDeveloper" rel="alternate" title="Stephen Bartholomew, Ruby Developer" type="application/atom+xml">
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-30521926-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <nav role="navigation"><ul class="subscription" data-subscription="rss">
+  <li><a href="http://twitter.com/sbartholomew" target="_new">Twitter</a></li>
+  <li><a href="http://github.com/stevebartholomew" target="_new">Github</a></li>
+  <li><a href="http://feeds.feedburner.com/StephenBartholomewFreelanceRubyDeveloper" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+</ul>
+  
+<ul class="main-navigation">
+  
+    <li><a href="/">&laquo; Stephen Bartholomew</a></li>
+  
+  <li><a href="/blog">Blog</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Building SBGauge</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-05T17:59:00+00:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>I built <code>SBGauge</code> as part of <a href="http://www.groovecoachapp.com">GrooveCoach</a> as a way to indicate which &#8216;level&#8217; the user was on. When you tapped &#8216;+&#8217; or &#8216;-&#8217; the gauge changed accordingly. As part of developing that app I was keen to open source anything I could.</p>
+
+<p>Given the flexibility of this simple library, I thought it would make an interesting code walkthrough.</p>
+
+<!-- more -->
+
+
+<h2>Drawing the Gauge</h2>
+
+<p><code>SBGauge</code> consists of two <code>CAShapeLayer</code>s: the animating gauge itself and the &#8216;track&#8217; underneath.  The <code>draw</code> method simply creates two circles with different colors and adds them to the view&#8217;s backing layer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">gaugeLayer</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">drawCircleLayer:</span><span class="n">self</span><span class="p">.</span><span class="n">gaugeColor</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="n">CAShapeLayer</span> <span class="o">*</span><span class="n">trackLayer</span> <span class="o">=</span> <span class="p">[</span><span class="n">self</span> <span class="nl">drawCircleLayer:</span><span class="n">self</span><span class="p">.</span><span class="n">trackColor</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">layer</span> <span class="nl">addSublayer:</span><span class="n">trackLayer</span><span class="p">];</span>
+</span><span class='line'><span class="p">[</span><span class="n">self</span><span class="p">.</span><span class="n">layer</span> <span class="nl">addSublayer:</span><span class="n">gaugeLayer</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>The circles are drawn by the <code>drawCircleLayer:(UIColor *)color</code> method in <code>SBGaugeView</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'>  <span class="n">circleLayer</span><span class="p">.</span><span class="n">path</span> <span class="o">=</span> <span class="p">[</span><span class="n">UIBezierPath</span> <span class="nl">bezierPathWithRoundedRect:</span><span class="n">CGRectInset</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">bounds</span><span class="p">,</span> <span class="n">inset</span><span class="p">,</span> <span class="n">inset</span><span class="p">)</span>
+</span><span class='line'>                                                <span class="nl">cornerRadius:</span><span class="n">radius</span><span class="o">-</span><span class="n">inset</span><span class="p">].</span><span class="n">CGPath</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Using <code>CGRectInset</code> means we draw <em>within</em> the view itself, not on the outside. This is especially if you&#8217;re working in interface builder - the gauge shouldn&#8217;t bust out of the frame you create for the view.</p>
+
+<h2>Context</h2>
+
+<p><code>SBGaugeContext</code> is responsible for calculating how big the segments will be and keeping track of the current &#8216;step&#8217;.  It is initialized with the number of segments:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">gauge</span> <span class="o">=</span> <span class="p">[[</span><span class="n">SBGaugeContext</span> <span class="n">alloc</span><span class="p">]</span> <span class="nl">initWithSegments:</span><span class="n">self</span><span class="p">.</span><span class="n">segments</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>When you tell <code>SBGauge</code> to <code>stepUp</code>, the current <code>SBGaugeContext</code> will figure out what the current &#8216;step&#8217; should now be. <code>SBGauge</code> will then draw based on this new context.</p>
+
+<p>This decouples the logic surrounding step calculations from the drawing of the view itself.</p>
+
+<h2>Animating</h2>
+
+<p>When the view is redrawn, a <code>CABasicAnimation</code> is created to animate from the previous gauge step to the current step. <code>animateProgress</code> uses the gauge layer&#8217;s &#8216;strokeEnd&#8217; animate the length of the gauge:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="c1">// setup a basic animation using strokeEnd</span>
+</span><span class='line'><span class="n">CABasicAnimation</span> <span class="o">*</span><span class="n">drawAnimation</span> <span class="o">=</span> <span class="p">[</span><span class="n">CABasicAnimation</span> <span class="nl">animationWithKeyPath:</span><span class="s">@&quot;strokeEnd&quot;</span><span class="p">];</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">duration</span>            <span class="o">=</span> <span class="mf">0.2</span><span class="p">;</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">repeatCount</span>         <span class="o">=</span> <span class="mf">1.0</span><span class="p">;</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">removedOnCompletion</span> <span class="o">=</span> <span class="n">NO</span><span class="p">;</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// set the from/to values based on the user&#39;s previous &#39;step&#39; &amp; the current one</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">fromValue</span> <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="n">gauge</span><span class="p">.</span><span class="n">previous</span><span class="p">];</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">toValue</span>   <span class="o">=</span> <span class="p">[</span><span class="n">NSNumber</span> <span class="nl">numberWithFloat:</span><span class="n">gauge</span><span class="p">.</span><span class="n">value</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// set how the animation should look</span>
+</span><span class='line'><span class="n">drawAnimation</span><span class="p">.</span><span class="n">timingFunction</span> <span class="o">=</span> <span class="p">[</span><span class="n">CAMediaTimingFunction</span> <span class="nl">functionWithName:</span><span class="n">kCAMediaTimingFunctionEaseIn</span><span class="p">];</span>
+</span><span class='line'>
+</span><span class='line'><span class="c1">// finally apply the animation to the gauge layer</span>
+</span><span class='line'><span class="p">[</span><span class="n">gaugeLayer</span> <span class="nl">addAnimation:</span><span class="n">drawAnimation</span> <span class="nl">forKey:</span><span class="nb">nil</span><span class="p">];</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>You&#8217;ll see that <code>SBGaugeContext</code> handles the calculation of the value itself.</p>
+
+<h2>Style</h2>
+
+<p><code>SBGauge</code> doesn&#8217;t have any additional built in &#8216;looks&#8217; but by simply setting the <code>width</code> property, a number of different styles can be achieved.</p>
+
+<p>The size of the gauge itself is calcuated based on the containing frame (plus some hardcoded tweaking):</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+</pre></td><td class='code'><pre><code class='obj-c'><span class='line'><span class="n">CGFloat</span> <span class="n">radius</span> <span class="o">=</span> <span class="p">(</span><span class="n">MIN</span><span class="p">(</span><span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">width</span><span class="p">,</span><span class="n">self</span><span class="p">.</span><span class="n">frame</span><span class="p">.</span><span class="n">size</span><span class="p">.</span><span class="n">height</span><span class="p">)</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">40</span><span class="p">;</span>
+</span><span class='line'><span class="n">CGFloat</span> <span class="n">inset</span>  <span class="o">=</span> <span class="n">self</span><span class="p">.</span><span class="n">width</span><span class="o">/</span><span class="mi">2</span><span class="p">;</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>This makes it possible to get at least an idea of the size of the view in interface builder.</p>
+
+<hr/>
+
+
+<p>That&#8217;s really all there is to it!</p>
+
+<p>I&#8217;ve since experimented with driving the guage using a large number of steps and an <code>NSTimer</code> which find in the project&#8217;s <a href="http://www.github.com/stevebartholomew/SBGauge/">README</a>.</p>
+
+<p><a href="http://www.github.com/stevebartholomew/SBGauge">Check it out on Github</a> - I&#8217;d love your feedback.</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Posted by <span class="fn">Stephen Bartholomew</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2013-11-05T17:59:00+00:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://stephenbartholomew.co.uk/blog/2013/11/05/building-sbgauge/" data-via="sbartholomew" data-counturl="http://stephenbartholomew.co.uk/blog/2013/11/05/building-sbgauge/" >Tweet</a>
+  
+  
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/06/07/glass-bottles-and-the-law-of-demeter/" title="Previous Post: Glass Bottles and the Law of Demeter">&laquo; Glass Bottles and the Law of Demeter</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+  <section>
+    <h1>Comments</h1>
+    <div id="disqus_thread" aria-live="polite"><noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+  </section>
+
+</div>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2013 - Stephen Bartholomew -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+<script type="text/javascript">
+      var disqus_shortname = 'stephenbartholomew';
+      
+        
+        // var disqus_developer = 1;
+        var disqus_identifier = 'http://stephenbartholomew.co.uk/blog/2013/11/05/building-sbgauge/';
+        var disqus_url = 'http://stephenbartholomew.co.uk/blog/2013/11/05/building-sbgauge/';
+        var disqus_script = 'embed.js';
+      
+    (function () {
+      var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+      dsq.src = 'http://' + disqus_shortname + '.disqus.com/' + disqus_script;
+      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    }());
+</script>
+
+
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
