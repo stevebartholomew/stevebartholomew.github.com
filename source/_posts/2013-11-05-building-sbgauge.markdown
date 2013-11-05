@@ -6,13 +6,10 @@ comments: true
 categories: 
 ---
 
-I built `SBGauge` as part of the version 1 of [GrooveCoach](http://www.groovecoachapp.com) as a way to indicate which 'level' the user was on. When you tapped '+' or '-' the gauge changed accordingly. As part of developing that app I was keen to open source anything I could.
+I built `SBGauge` as part of [GrooveCoach](http://www.groovecoachapp.com) as a way to indicate which 'level' the user was on. When you tapped '+' or '-' the gauge changed accordingly. As part of developing that app I was keen to open source anything I could.
 
-I've since experimented with driving the guage using a large number of steps and an `NSTimer`.
 
 Given the flexibility of this simple library, I thought it would make an interesting code walkthrough.
-
-You'll find all the [code for the project on Github](http://www.github.com/stevebartholomew/SBGauge).
 
 <!-- more -->
 
@@ -90,5 +87,7 @@ This makes it possible to get at least an idea of the size of the view in interf
 <hr/>
 
 That's really all there is to it!
+
+I've since experimented with driving the guage using a large number of steps and an `NSTimer` which find in the project's [README](http://www.github.com/stevebartholomew/SBGauge/).
 
 [Check it out on Github](http://www.github.com/stevebartholomew/SBGauge) - I'd love your feedback.
