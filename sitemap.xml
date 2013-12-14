@@ -15,12 +15,18 @@
         <lastmod>2013-11-05T17:58:29+00:00</lastmod>
     </url>
     <url>
+        <loc>
+            http://stephenbartholomew.co.uk/blog/2013/12/14/automated-ui-testing-with-cucumber-for-cordova-phonegap-apps/
+        </loc>
+        <lastmod>2013-12-14T21:06:31+00:00</lastmod>
+    </url>
+    <url>
         <loc>http://stephenbartholomew.co.uk/blog/archives/</loc>
-        <lastmod>2013-11-05T17:58:29+00:00</lastmod>
+        <lastmod>2013-12-14T21:06:31+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/</loc>
-        <lastmod>2013-11-05T17:58:29+00:00</lastmod>
+        <lastmod>2013-12-14T21:06:31+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/hire-me/</loc>
@@ -28,6 +34,6 @@
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/</loc>
-        <lastmod>2013-11-05T17:58:29+00:00</lastmod>
+        <lastmod>2013-12-14T21:06:31+00:00</lastmod>
     </url>
 </urlset>
