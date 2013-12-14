@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew, Ruby Developer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2013-12-14T21:06:32+00:00</updated>
+  <updated>2013-12-14T21:08:26+00:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>Both iOS and Android have UI automation frameworks for driving the UI which is great for integration/acceptance testing for your app.  However, when you&#8217;re using a web/native hybrid framework like Cordova, this can get tricky.</p>
 
 <p>If you come from the Ruby world, you may also be used to using Cucumber for integration testing. While the testing landscape for hybrid apps is a little rocky, a lot of smart people are working on some great tools to improve things. With some effort, you can have Cucumber-based integration spec suite up and running for your hybrid app with relative ease.</p>
+
+<!-- more -->
+
 
 <h2>The Main Players</h2>
 
