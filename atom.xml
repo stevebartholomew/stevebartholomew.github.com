@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew, Ruby Developer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2014-04-07T13:38:39+01:00</updated>
+  <updated>2014-04-07T13:41:27+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -21,6 +21,9 @@
     <content type="html"><![CDATA[<p>My wife has had the same website I built for her <a href="http://www.sevenveils.co.uk">dance business</a> in 2005. In that time we&#8217;ve had countless attempts at redeveloping it, normally starting with opening Photoshop, or setting up an account on the latest CMS service. These attempts all ended up half completed.</p>
 
 <p>Running off the high of an event on Saturday night, we sat down on Sunday to prepare for the next show. Rather than the usual hacky updates, I decided to do improve things a little. Not a full rebuild, not perfect - but good enough.</p>
+
+<!-- more -->
+
 
 <p>3 hours later I had not only made the content changes but also improved the layout  <em>and</em> made developing it much easier.</p>
 
