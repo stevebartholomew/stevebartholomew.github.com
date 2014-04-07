@@ -9,6 +9,8 @@ My wife has had the same website I built for her [dance business](http://www.sev
 
 Running off the high of an event on Saturday night, we sat down on Sunday to prepare for the next show. Rather than the usual hacky updates, I decided to do improve things a little. Not a full rebuild, not perfect - but good enough.
 
+<!-- more -->
+
 3 hours later I had not only made the content changes but also improved the layout  *and* made developing it much easier.
 
 ## Before
