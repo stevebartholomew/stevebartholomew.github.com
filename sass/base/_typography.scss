@@ -99,7 +99,7 @@ pre, code, tt { @extend .mono; }
 
 sub, sup { line-height: 0; }
 
-hr { margin-bottom: 0.2em; }
+hr {  border: 0; border-bottom: 1px dotted #ccc;}
 
 small { font-size: .8em; }
 
