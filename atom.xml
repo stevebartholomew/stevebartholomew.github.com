@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew, Ruby Developer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2014-04-07T13:41:27+01:00</updated>
+  <updated>2014-04-11T13:27:31+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -12,6 +12,37 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dev Diary - 11th April 2014]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2014/04/11/dev-diary-11th-april-2014/"/>
+    <updated>2014-04-11T13:20:00+01:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2014/04/11/dev-diary-11th-april-2014</id>
+    <content type="html"><![CDATA[<h2>This week</h2>
+
+<p>Super excited that the project I&#8217;m on a work is shipping next week!</p>
+
+<p>Looking back I&#8217;m pretty impressed with what we’ve achieved so far.  We&#8217;ve used open source tech well but we’re still only a small team.  Over the coming weeks we&#8217;ll be shipping an app on both iOS and Android that hooks up to our existing backend systems - then the real work starts!</p>
+
+<hr />
+
+<p>We were lucky enough to not be vulnerable to heartbleed but I&#8217;ve really enjoyed digging into the bug.  There’s a great rundown of the specifics <a href="http://blog.existentialize.com/diagnosis-of-the-openssl-heartbleed-bug.html">here</a>.</p>
+
+<p>I’ve always worked in memory managed languages, but my current C studying has just hit memory management. I was pleased to be able to keep up!</p>
+
+<h2>Reading</h2>
+
+<p>I&#8217;ve finally picked up <a href="http://sicpebook.wordpress.com/">SICP</a>. Not too far in yet but it’s great to be digging deeper into compsci.</p>
+
+<p>On my commute I’m still working through the &#8221;<a href="http://c.learncodethehardway.org/">Learn C the Hard Way</a>&#8221; which has been a lot of fun.  I have to confess that I’ve started copy/pasting the code but that is meaning I have more time for the ‘Extra Credit’ exercises.</p>
+
+<p>My son is obsessed with Minecraft so I’ve also picked up the <a href="http://pragprog.com">pragprog</a>&#8217;s <a href="http://pragprog.com/book/ahmine/learn-to-program-with-minecraft-plugins">book on creating plugins for the game</a>. It’s giving me a light introduction to Java and has been good to pair with a 5 year old.</p>
+
+<h2>Listening</h2>
+
+<p>Related to the Minecraft obsession, I’ve found the “Volume Alpha” by C418 really good for coding.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Iterate Imperfection]]></title>
