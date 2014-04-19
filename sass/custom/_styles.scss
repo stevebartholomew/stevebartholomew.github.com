@@ -21,6 +21,14 @@ body #content > div > article {
   font-size: 0.8em;
 }
 
+article header {
+  margin-bottom: 0em;
+}
+
+h1 {
+  font-size: 2.3em;
+}
+
 h1, h2, h3, h4 {
   font-family: 'helvetica', sans-serif;
   font-weight: normal;
@@ -43,4 +51,8 @@ body > nav {
       color: #eee;
     }
   }
+}
+
+body #content > div > section {
+  padding: 0;
 }
