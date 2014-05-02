@@ -10,7 +10,7 @@ A little slow this week while we debate largely non-technical issues with Apple.
 
 ---
 
-On a more positive front we had a very successful deploy of a huge improvement to the most important part of our service. It was a multi-app deploy and has so far gone off without a hitch. This is how it *should* be of course but you can never be 100% until it's in the wild. As well as [Randy's](http://twitter.com/randym) awesome code we also did quite a bit of manual testing and a detailed code review.
+On a more positive front we had a very successful deploy of a huge improvement to the most important part of our service. It was a multi-app deploy and has so far gone off without a hitch. This is how it *should* be of course but you can never be 100% until it's in the wild. As well as [Randy's](http://twitter.com/morgan_randy) awesome code we also did quite a bit of manual testing and a detailed code review.
 
 ## Listening
 
