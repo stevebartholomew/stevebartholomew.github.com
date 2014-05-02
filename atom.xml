@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew: Programmer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2014-05-02T07:58:42+01:00</updated>
+  <updated>2014-05-02T08:06:55+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -22,7 +22,7 @@
 
 <hr />
 
-<p>On a more positive front we had a very successful deploy of a huge improvement to the most important part of our service. It was a multi-app deploy and has so far gone off without a hitch. This is how it <em>should</em> be of course but you can never be 100% until it&#8217;s in the wild. As well as <a href="http://twitter.com/randym">Randy&#8217;s</a> awesome code we also did quite a bit of manual testing and a detailed code review.</p>
+<p>On a more positive front we had a very successful deploy of a huge improvement to the most important part of our service. It was a multi-app deploy and has so far gone off without a hitch. This is how it <em>should</em> be of course but you can never be 100% until it&#8217;s in the wild. As well as <a href="http://twitter.com/morgan_randy">Randy&#8217;s</a> awesome code we also did quite a bit of manual testing and a detailed code review.</p>
 
 <h2>Listening</h2>
 
