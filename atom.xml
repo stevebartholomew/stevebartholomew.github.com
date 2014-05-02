@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew: Programmer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2014-04-25T08:52:14+01:00</updated>
+  <updated>2014-05-02T07:53:16+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -12,6 +12,25 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dev Diary - 2nd May 2014]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2014/05/02/dev-diary-2nd-may-2014/"/>
+    <updated>2014-05-02T07:42:00+01:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2014/05/02/dev-diary-2nd-may-2014</id>
+    <content type="html"><![CDATA[<p>A little slow this week while we debate largely non-technical issues with Apple. Doubling-down on Android is the order of the week.</p>
+
+<hr />
+
+<p>On a more positive front we had a very successful deploy of a huge improvement to the most important part of our service. It was a multi-app deploy and has so far gone off without a hitch. This is how it <em>should</em> be of course but you can never be 100% until it&#8217;s in the wild. As well as <a href="http://twitter.com/randym">Randy&#8217;s</a> awesome code we also did quite a bit of manual testing and a detailed code review.</p>
+
+<h2>Listening</h2>
+
+<p><a href="https://twitter.com/glassbottommeg">Megan Fox</a> discussed game dev on this week&#8217;s <a href="http://www.rubyrogues.com">Ruby Rouges</a> which was low on Ruby but and interesting insight into an industry so different to the web dev I&#8217;m used to.</p>
+
+<p>I literally cried listening to <a href="https://twitter.com/ProfSaraSeager">Sara Seager</a> on <a href="http://storycollider.org/podcast/2014-04-30">Story collider</a>. The episode is funny, tragic but also beautifully inspiring - impressive for only 16 minutes.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dev Diary - 25th April 2014]]></title>
