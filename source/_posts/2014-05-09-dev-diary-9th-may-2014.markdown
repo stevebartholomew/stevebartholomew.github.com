@@ -1,0 +1,40 @@
+---
+layout: post
+title: "Dev Diary - 9th May 2014"
+date: 2014-05-09 07:32
+comments: true
+categories: 
+---
+
+## Android woes
+
+Mostly fighting off Android issues with our audio player component. Cordova's [Media plugin](https://github.com/apache/cordova-plugin-media) is a little difficult to work with as it's very much written to work with older iOS APIs. This seems to have influenced how the other platform integrations work.
+
+
+There are very limited event callbacks as the audio plays so I have to keep track of playing using a timer:
+
+```javascript
+this.timer = setInterval(_.bind(this.updatePlayerStatus, this), 1000);
+```
+
+I can't rely on the timer for position data so I get it using `getCurrentPosition`:
+
+```javascript
+updatePlayerStatus: function() {
+  this.player.getCurrentPosition(_.bind(function(position) {
+    // update UI
+  });
+}
+```
+
+Trouble is this sometimes leads to the UI being out of sync with the audio.
+
+I'm also not happy with my UI implementation as it uses a native web form slider. This was a quick implementation but it needs workarounds to get a 'played' track - which can be a little flaky.
+
+## Android joys
+
+On a more positive note, I've found the joy of [remote debugging on Android](https://developer.chrome.com/devtools/docs/remote-debugging). I'm used to this on iOS of course but the Android tools are even better. Safari's remote inspector constantly disappears and you don't get any console logging that occurs prior to opening the inspector. Very impressed with Android here.
+
+## Listening
+
+I've mentioned [Debug](http://www.imore.com/debug) before; they have great interviews with developers about their history & work. This week they [interviewed Scotty](http://www.imore.com/debug-35-scotty-nsconference-and-remobjects) of NSConference and iDeveloper fame.
