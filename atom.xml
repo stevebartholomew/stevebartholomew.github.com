@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew: Programmer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2014-05-09T07:59:20+01:00</updated>
+  <updated>2014-05-09T17:06:30+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -12,6 +12,58 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Notes from #isTDDDead?]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2014/05/09/notes-from-number-istdddead/"/>
+    <updated>2014-05-09T17:04:00+01:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2014/05/09/notes-from-number-istdddead</id>
+    <content type="html"><![CDATA[<p>I worried that I was going to find the discussion between <a href="http://twitter.com/dhh">DHH</a>, <a href="http://twitter.com/kentbeck">Kent Beck</a> and <a href="http://twitter.com/martinfowler">Martin Fowler</a> annoying but I actually really enjoyed it. Well worth <a href="https://plus.google.com/events/ci2g23mk0lh9too9bgbp3rbut0k">watching</a>.</p>
+
+<p>Kent &amp; Martin&#8217;s responses seemed quite surprising to DHH who appears to have had a very dogmatic experience of TDD. The daily use of the guys that were influential in the popularisation of the techniques were more pragmatic than many people will have imagined.</p>
+
+<p>I look forward to the next discussion where I think we&#8217;ll get into the meat of TDD.</p>
+
+<p>I wrote a number of headline points for your enjoyment!</p>
+
+<h2>Kent Beck</h2>
+
+<ul>
+<li>If an idea is bad, find a cheap way to try it</li>
+<li>Programmers have a right to feel confident about their code</li>
+<li>TDD is one way to achieve confidence</li>
+<li>Mixing techniques - some TDD, some not is totally fine - it&#8217;s powerful tool</li>
+<li>TDD is often about trade offs</li>
+<li>Don&#8217;t twist design to make it testable</li>
+<li>Generally doesn&#8217;t mock anything
+
+<ul>
+<li>Mocking can couple you to implementation which too high a price</li>
+<li>Repeatable feedback loop is far more important</li>
+</ul>
+</li>
+</ul>
+
+
+<h2> DHH</h2>
+
+<ul>
+<li>Dogma in TDD circles is big problem (i.e. you <em>must</em> TDD 100% to be a &#8216;professional&#8217;)</li>
+<li>Mocking forces unnatural structure, supporting tests instead of code</li>
+<li>&#8220;Easy to test == better design&#8221; is a fallacy</li>
+<li>Understandability is often compromised</li>
+</ul>
+
+
+<h2>Martin Fowler</h2>
+
+<ul>
+<li>TDD does not imply isolation or mocking</li>
+<li>Self-testing code is one of the most important things to deliver - TDD is one approach and it has other benefits</li>
+</ul>
+
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dev Diary - 9th May 2014]]></title>
