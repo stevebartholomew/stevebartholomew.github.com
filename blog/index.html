@@ -9,7 +9,7 @@
   <meta name="author" content="Stephen Bartholomew">
 
   
-  <meta name="description" content="A little slow this week while we debate largely non-technical issues with Apple. Doubling-down on Android is the order of the week. On a more &hellip;">
+  <meta name="description" content="Android woes Mostly fighting off Android issues with our audio player component. Cordova&#8217;s Media plugin is a little difficult to work with as &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,6 +50,78 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/05/09/dev-diary-9th-may-2014/">Dev Diary - 9th May 2014</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-05-09T07:32:00+01:00" pubdate data-updated="true">May 9<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Android woes</h2>
+
+<p>Mostly fighting off Android issues with our audio player component. Cordova&#8217;s <a href="https://github.com/apache/cordova-plugin-media">Media plugin</a> is a little difficult to work with as it&#8217;s very much written to work with older iOS APIs. This seems to have influenced how the other platform integrations work.</p>
+
+<p>There are very limited event callbacks as the audio plays so I have to keep track of playing using a timer:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="k">this</span><span class="p">.</span><span class="nx">timer</span> <span class="o">=</span> <span class="nx">setInterval</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">updatePlayerStatus</span><span class="p">,</span> <span class="k">this</span><span class="p">),</span> <span class="mi">1000</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I can&#8217;t rely on the timer for position data so I get it using <code>getCurrentPosition</code>:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">updatePlayerStatus</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+</span><span class='line'>  <span class="k">this</span><span class="p">.</span><span class="nx">player</span><span class="p">.</span><span class="nx">getCurrentPosition</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">position</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>    <span class="c1">// update UI</span>
+</span><span class='line'>  <span class="p">});</span>
+</span><span class='line'><span class="p">}</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Trouble is this sometimes leads to the UI being out of sync with the audio.</p>
+
+<p>I&#8217;m also not happy with my UI implementation as it uses a native web form slider. This was a quick implementation but it needs workarounds to get a &#8216;played&#8217; track - which can be a little flaky.</p>
+
+<h2>Android joys</h2>
+
+<p>On a more positive note, I&#8217;ve found the joy of <a href="https://developer.chrome.com/devtools/docs/remote-debugging">remote debugging on Android</a>. I&#8217;m used to this on iOS of course but the Android tools are even better. Safari&#8217;s remote inspector constantly disappears and you don&#8217;t get any console logging that occurs prior to opening the inspector. Very impressed with Android here.</p>
+
+<h2>Listening</h2>
+
+<p>I&#8217;ve mentioned <a href="http://www.imore.com/debug">Debug</a> before; they have great interviews with developers about their history &amp; work. This week they <a href="http://www.imore.com/debug-35-scotty-nsconference-and-remobjects">interviewed Scotty</a> of NSConference and iDeveloper fame.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
