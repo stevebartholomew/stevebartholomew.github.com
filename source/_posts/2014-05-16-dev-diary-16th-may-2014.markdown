@@ -1,0 +1,30 @@
+---
+layout: post
+title: "Dev Diary - 16th May 2014"
+date: 2014-05-16 07:33
+comments: true
+categories:
+---
+
+## Analytics
+
+This week was mostly about analytics. I worked on [updating and adding UserId features](https://github.com/danwilson/google-analytics-plugin/pull/22) to Dan Wilson's [Cordova Google Analytics plugin](https://github.com/danwilson/google-analytics-plugin).
+
+Overall I'm pleased with the result but the workflow of Cordova plugins is not straight forward, especially as there is no standard way to build a test suite. This meant manual testing all the way, reloading plugins in my actual app for each platform in order to test.
+
+I'd like to hear about testing Cordova plugins - even at a unit level as it would make the process much slicker. I've had a few ideas so I may investigate myself at some point.
+
+## Language Overload
+
+I've enjoyed the variation in programming languages I've had this week. Combining work on our app, the plugin work and personal study I've written a fair amount of C, C#, Objective-C, Java, Javascript & Ruby.
+
+## Back to Rails
+
+I've been away from regular Rails dev for quite a while so it was nice to get back by doing some upgrade work on a CMS app that I host for our [local NCT](http://www.nctmedway.org.uk). It was fairly painless to upgrade the app from 3.0.1 to 4.1 and along the way I got a good feel for the recent changes.
+
+
+## Listening
+
+The Ruby Rouges had [Julia Grace](https://twitter.com/jewelia) on to talk about [hardware hacking](http://rubyrogues.com/156-rr-hardware-hacking-with-julia-grace/).
+
+[Directional](http://5by5.tv/directional/11) did a 2 hour long commentary of the Nintendo DS keynote from 10 years ago.
