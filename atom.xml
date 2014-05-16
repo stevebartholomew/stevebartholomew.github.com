@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew: Programmer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2014-05-09T17:06:30+01:00</updated>
+  <updated>2014-05-16T08:56:24+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -12,6 +12,35 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dev Diary - 16th May 2014]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2014/05/16/dev-diary-16th-may-2014/"/>
+    <updated>2014-05-16T07:33:00+01:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2014/05/16/dev-diary-16th-may-2014</id>
+    <content type="html"><![CDATA[<h2>Analytics</h2>
+
+<p>This week was mostly about analytics. I worked on <a href="https://github.com/danwilson/google-analytics-plugin/pull/22">updating and adding UserId features</a> to Dan Wilson&#8217;s <a href="https://github.com/danwilson/google-analytics-plugin">Cordova Google Analytics plugin</a>.</p>
+
+<p>Overall I&#8217;m pleased with the result but the workflow of Cordova plugins is not straight forward, especially as there is no standard way to build a test suite. This meant manual testing all the way, reloading plugins in my actual app for each platform in order to test.</p>
+
+<p>I&#8217;d like to hear about testing Cordova plugins - even at a unit level as it would make the process much slicker. I&#8217;ve had a few ideas so I may investigate myself at some point.</p>
+
+<h2>Language Overload</h2>
+
+<p>I&#8217;ve enjoyed the variation in programming languages I&#8217;ve had this week. Combining work on our app, the plugin work and personal study I&#8217;ve written a fair amount of C, C#, Objective-C, Java, Javascript &amp; Ruby.</p>
+
+<h2>Back to Rails</h2>
+
+<p>I&#8217;ve been away from regular Rails dev for quite a while so it was nice to get back by doing some upgrade work on a CMS app that I host for our <a href="http://www.nctmedway.org.uk">local NCT</a>. It was fairly painless to upgrade the app from 3.0.1 to 4.1 and along the way I got a good feel for the recent changes.</p>
+
+<h2>Listening</h2>
+
+<p>The Ruby Rouges had <a href="https://twitter.com/jewelia">Julia Grace</a> on to talk about <a href="http://rubyrogues.com/156-rr-hardware-hacking-with-julia-grace/">hardware hacking</a>.</p>
+
+<p><a href="http://5by5.tv/directional/11">Directional</a> did a 2 hour long commentary of the Nintendo DS keynote from 10 years ago.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Notes from #isTDDDead?]]></title>
