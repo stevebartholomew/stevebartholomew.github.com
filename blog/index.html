@@ -9,7 +9,7 @@
   <meta name="author" content="Stephen Bartholomew">
 
   
-  <meta name="description" content="Analytics This week was mostly about analytics. I worked on updating and adding UserId features to Dan Wilson&#8217;s Cordova Google Analytics plugin &hellip;">
+  <meta name="description" content="In-app Purchase Turns out that we need to implement some form of in-app purchase on our app in order to get into the app store. It can be frustrating &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,6 +50,90 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/06/06/dev-diary-6th-june-2014/">Dev Diary - 6th June 2014</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-06T07:33:00+01:00" pubdate data-updated="true">Jun 6<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>In-app Purchase</h2>
+
+<p>Turns out that we need to implement some form of in-app purchase on our app in order to get into the app store. It can be frustrating with Apple because, despite giving us this guidance, they cannot give us a clear &#8216;yes&#8217; or &#8216;no&#8217; in principal until we submit. Because of this we focused on a minimal implementation and have almost complete the work with a week left in our current sprint.</p>
+
+<p>We used the <a href="https://github.com/j3k0/PhoneGap-InAppPurchase-iOS">iOS In-App Purchase</a> plugin for Cordova/PhoneGap which works with both old and new receipt styles. Because we&#8217;re targeting iOS 7, we don&#8217;t need to have any server side components. Overall I&#8217;ve enjoyed digging into the IAP side of iOS dev - in particular the &#8220;Using Store Kit for In-App Purchases&#8221; video from <a href="https://developer.apple.com/videos/wwdc/2013/">WWDC 2013</a> really solidified my understanding.</p>
+
+<h2>I18n with gettext</h2>
+
+<p>Internationalization is a big deal for us as we largely target Japanese &amp; Chinese users. We&#8217;ve had a few ways approaching this in the past and all have become difficult to work with.</p>
+
+<p><a href="https://twitter.com/timpeat">Tim</a> did some research and suggested we try out the old standard <a href="http://www.gnu.org/software/gettext/">gettext</a>. The benefit here is that the toolchain is highly advanced but the actual usage is very straight forward. It also uses standards that our translators are familiar with. I&#8217;m also impressed how simple the integration with code is. Having base keys of actual text means that code makes more sense to read:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="kd">var</span> <span class="nx">heading</span> <span class="o">=</span> <span class="nx">I18n</span><span class="p">.</span><span class="nx">gettext</span><span class="p">(</span><span class="s1">&#39;Welcome to my site&#39;</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>I wrapped up the <a href="https://github.com/zaach/jsxgettext">jsxgettext</a> npm module in a singleton that we could <code>require</code> through out the code where needed. Handlebars integration was very simple:</p>
+
+<figure class='code'><figcaption><span></span></figcaption><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class='javascript'><span class='line'><span class="nx">Handlebars</span><span class="p">.</span><span class="nx">registerHelper</span><span class="p">(</span><span class="s1">&#39;tr&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">text</span><span class="p">)</span> <span class="p">{</span>
+</span><span class='line'>  <span class="kd">var</span> <span class="nx">translation</span> <span class="o">=</span> <span class="nx">I18n</span><span class="p">.</span><span class="nx">gettext</span><span class="p">(</span><span class="nx">text</span><span class="p">);</span>
+</span><span class='line'>
+</span><span class='line'>   <span class="k">return</span> <span class="nx">translation</span><span class="p">;</span>
+</span><span class='line'><span class="p">},</span> <span class="k">this</span><span class="p">);</span>
+</span></code></pre></td></tr></table></div></figure>
+
+
+<p>We can then extract translations into <code>.pot</code> files and use gettext&#8217;s <code>msgmerge</code> to handle merging &amp; building of locale <code>.po</code> files.</p>
+
+<h2>Appium</h2>
+
+<p>Our apps automated UI specs have been pretty flaky for a while. Many times a day we&#8217;d get failures from <a href="https://travis-ci.com/">Travis</a> because the simulator was just hanging or didn&#8217;t even boot. Thankfully <a href="http://appium.io/">Appium 1.0</a> dropped a few of weeks ago and the improvements looked promising. <a href="https://twitter.com/morgan_randy">Randy</a> set out getting our cucumber steps inline with the new API and so far everything has been running very smoothly.</p>
+
+<h2>Swift</h2>
+
+<p>Like many, many developers I was super excited after the <a href="http://www.apple.com/apple-events/june-2014/">Apple keynote</a> on Monday. As well as taking a look at the new APIs I&#8217;ve been working through the <a href="https://developer.apple.com/library/prerelease/ios/documentation/swift/conceptual/swift_programming_language/TheBasics.html">Swift language guide</a>. Just getting familiar with the syntax and approach for now but I&#8217;m looking forward to writing some actual code in it soon. It&#8217;s great to see Apple moving on something like this and exciting to see another platform going in a functional programming direction.</p>
+
+<h2>Reading</h2>
+
+<p>I&#8217;ve read Ilya Grigorik&#8217;s <a href="https://www.igvita.com/2014/05/05/minimum-viable-block-chain/">Minimum Viable Block Chain</a> post multiple times this week - really interesting tech explained clearly. It&#8217;s made me think about ways to apply the concepts behind crypto currencies to other areas that have similar problem sets. Establishing validity and history is not limited to financial transactions.</p>
+
+<h2>Listening</h2>
+
+<p>I loved Radiolabs episode <a href="http://www.radiolab.org/story/things/">&#8220;Things&#8221;</a>. As always, interesting stories with lots to think about afterwards. I used to be very attached to &#8220;things&#8221; in the past and while I&#8217;ve improved, this episode really made me think about how more I could let go of.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -560,49 +644,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2013/12/14/automated-ui-testing-with-cucumber-for-cordova-phonegap-apps/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/11/05/building-sbgauge/">Building SBGauge</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-11-05T17:59:00+00:00" pubdate data-updated="true">Nov 5<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>I built <code>SBGauge</code> as part of <a href="http://www.groovecoachapp.com">GrooveCoach</a> as a way to indicate which &#8216;level&#8217; the user was on. When you tapped &#8216;+&#8217; or &#8216;-&#8217; the gauge changed accordingly. As part of developing that app I was keen to open source anything I could.</p>
-
-<p>Given the flexibility of this simple library, I thought it would make an interesting code walkthrough.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/11/05/building-sbgauge/">Read on &rarr;</a>
     </footer>
   
 
