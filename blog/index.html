@@ -9,7 +9,7 @@
   <meta name="author" content="Stephen Bartholomew">
 
   
-  <meta name="description" content="In-app Purchase Turns out that we need to implement some form of in-app purchase on our app in order to get into the app store. It can be frustrating &hellip;">
+  <meta name="description" content="App Store Approval We finally got App store approval! We had low expections about Apple&#8217;s turnaround but our resubmission was approved within a &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -56,6 +56,66 @@
       
   <header>
     
+      <h1 class="entry-title"><a href="/blog/2014/06/27/dev-diary-27th-june-2014/">Dev Diary - 27th June 2014</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-06-27T07:32:00+01:00" pubdate data-updated="true">Jun 27<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>App Store Approval</h2>
+
+<p>We finally got App store approval! We had low expections about Apple&#8217;s turnaround but our resubmission was approved within a few hours. After the various rejections, subsequent unplanned development and uncertainty, this has been a huge relief for the team. Of course we&#8217;re a few days from actual users getting their hands on it - then the real fun starts&#8230;</p>
+
+<h2>More Testing</h2>
+
+<p>As I&#8217;ve discussed <a href="/blog/2013/12/14/automated-ui-testing-with-cucumber-for-cordova-phonegap-apps/">before</a> our team is very committed to testing. This week however I&#8217;ve realised just how easy it is to miss regressions when your app is in flux. In particular two things stood out that we&#8217;re going to address immediately:</p>
+
+<h3>We missed some fairly likely scenarios in our integration specs</h3>
+
+<p>Testing use cases that involve offline > online transistions can be tough and we missed a particular case that had been tested to death manually when we first implemented. However, a point upgrade of one library introduced a regression that broke this use case. Our automated specs missed it.</p>
+
+<p>Thankfully, <a href="http://appium.io/">Appium 1.0</a> made testing cases like this a whole lot easier so we can fix it but this shows that even with a motivated team, it&#8217;s easy to miss things if the friction to testing is high.</p>
+
+<p>More broadly, we&#8217;ve noticed that our integration specs cover a lot of micro use cases instead of more closely simulating a user interacting with the app. Our plan is to simplify with full stack pathways through the app instead of individually specing each item of functionality seperately.</p>
+
+<h3>Our internal staff testers weren&#8217;t interested until we got approval</h3>
+
+<p>One of the company&#8217;s marketing people found the regression while testing after we announced App store approval. This was great but I was disappointed that we hadn&#8217;t had more people testing against the beta builds that have been pushed out for the past few months. This week has been great for digging out bugs but many could have been spotted and dealt with weeks ago rather than just before launch.</p>
+
+<p>In an ideal world we&#8217;d be able to push out to a team of dedicated testers which may be a direction we&#8217;ll go in. We&#8217;ll probably also chat to the staff and see if there&#8217;s any way we can make things easier for them to pick up during development.</p>
+
+<h2>Charles Proxy</h2>
+
+<p>One bug that I found occured when the device lost connection during a download of data. The app should cope with this but I found myself in a constant loading state while testing the app on a train. I used <a href="http://www.charlesproxy.com/">Charles proxy</a> to try different scenarios after reading <a href="http://codewithchris.com/tutorial-using-charles-proxy-with-your-ios-development-and-http-debugging/">this post</a>. I&#8217;d like to try building automated specs (given our experience above) but in the meantime this has been invaluable for throwing different situations at the app to try and break it.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
       <h1 class="entry-title"><a href="/blog/2014/06/06/dev-diary-6th-june-2014/">Dev Diary - 6th June 2014</a></h1>
     
     
@@ -81,7 +141,7 @@
 
   <div class="entry-content"><h2>In-app Purchase</h2>
 
-<p>Turns out that we need to implement some form of in-app purchase on our app in order to get into the app store. It can be frustrating with Apple because, despite giving us this guidance, they cannot give us a clear &#8216;yes&#8217; or &#8216;no&#8217; in principal until we submit. Because of this we focused on a minimal implementation and have almost complete the work with a week left in our current sprint.</p>
+<p>Turns out that we need to implement some form of in-app purchase on our app in order to get into the app store. It can be frustrating with Apple because, despite giving us this guidance, they cannot give us a clear &#8216;yes&#8217; or &#8216;no&#8217; in principal until we submit. Because of this we focused on a minimal implementation and have almost completed the work with a week left in our current sprint.</p>
 
 <p>We used the <a href="https://github.com/j3k0/PhoneGap-InAppPurchase-iOS">iOS In-App Purchase</a> plugin for Cordova/PhoneGap which works with both old and new receipt styles. Because we&#8217;re targeting iOS 7, we don&#8217;t need to have any server side components. Overall I&#8217;ve enjoyed digging into the IAP side of iOS dev - in particular the &#8220;Using Store Kit for In-App Purchases&#8221; video from <a href="https://developer.apple.com/videos/wwdc/2013/">WWDC 2013</a> really solidified my understanding.</p>
 
@@ -601,49 +661,6 @@
   
     <footer>
       <a rel="full-article" href="/blog/2014/04/07/iterate-imperfection/">Read on &rarr;</a>
-    </footer>
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2013/12/14/automated-ui-testing-with-cucumber-for-cordova-phonegap-apps/">Automated UI Testing With Cucumber for Cordova/Phonegap Apps</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2013-12-14T20:45:00+00:00" pubdate data-updated="true">Dec 14<span>th</span>, 2013</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Both iOS and Android have UI automation frameworks for driving the UI which is great for integration/acceptance testing for your app.  However, when you&#8217;re using a web/native hybrid framework like Cordova, this can get tricky.</p>
-
-<p>If you come from the Ruby world, you may also be used to using Cucumber for integration testing. While the testing landscape for hybrid apps is a little rocky, a lot of smart people are working on some great tools to improve things. With some effort, you can have Cucumber-based integration spec suite up and running for your hybrid app with relative ease.</p>
-
-</div>
-  
-  
-    <footer>
-      <a rel="full-article" href="/blog/2013/12/14/automated-ui-testing-with-cucumber-for-cordova-phonegap-apps/">Read on &rarr;</a>
     </footer>
   
 
