@@ -90,17 +90,15 @@
 
 <p>As I&#8217;ve discussed <a href="/blog/2013/12/14/automated-ui-testing-with-cucumber-for-cordova-phonegap-apps/">before</a> our team is very committed to testing. This week however I&#8217;ve realised just how easy it is to miss regressions when your app is in flux. In particular two things stood out that we&#8217;re going to address immediately:</p>
 
-<h3>We missed some fairly likely scenarios in our integration specs</h3>
-
-<p>Testing use cases that involve offline > online transistions can be tough and we missed a particular case that had been tested to death manually when we first implemented. However, a point upgrade of one library introduced a regression that broke this use case. Our automated specs missed it.</p>
+<p><strong> We missed some fairly likely scenarios in our integration specs </strong><br/>
+Testing use cases that involve offline > online transistions can be tough and we missed a particular case that had been tested to death manually when we first implemented. However, a point upgrade of one library introduced a regression that broke this use case. Our automated specs missed it.</p>
 
 <p>Thankfully, <a href="http://appium.io/">Appium 1.0</a> made testing cases like this a whole lot easier so we can fix it but this shows that even with a motivated team, it&#8217;s easy to miss things if the friction to testing is high.</p>
 
 <p>More broadly, we&#8217;ve noticed that our integration specs cover a lot of micro use cases instead of more closely simulating a user interacting with the app. Our plan is to simplify with full stack pathways through the app instead of individually specing each item of functionality seperately.</p>
 
-<h3>Our internal staff testers weren&#8217;t interested until we got approval</h3>
-
-<p>One of the company&#8217;s marketing people found the regression while testing after we announced App store approval. This was great but I was disappointed that we hadn&#8217;t had more people testing against the beta builds that have been pushed out for the past few months. This week has been great for digging out bugs but many could have been spotted and dealt with weeks ago rather than just before launch.</p>
+<p><strong> Our internal staff testers didn&#8217;t really test until we got approval </strong><br/>
+One of the company&#8217;s marketing people found the regression while testing after we announced App store approval. This was great but I was disappointed that we hadn&#8217;t had more people testing against the beta builds that have been pushed out for the past few months. This week has been great for digging out bugs but many could have been spotted and dealt with weeks ago rather than just before launch.</p>
 
 <p>In an ideal world we&#8217;d be able to push out to a team of dedicated testers which may be a direction we&#8217;ll go in. We&#8217;ll probably also chat to the staff and see if there&#8217;s any way we can make things easier for them to pick up during development.</p>
 
