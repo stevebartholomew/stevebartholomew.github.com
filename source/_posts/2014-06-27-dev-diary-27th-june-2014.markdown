@@ -14,16 +14,14 @@ We finally got App store approval! We had low expections about Apple's turnaroun
 
 As I've discussed [before](/blog/2013/12/14/automated-ui-testing-with-cucumber-for-cordova-phonegap-apps/) our team is very committed to testing. This week however I've realised just how easy it is to miss regressions when your app is in flux. In particular two things stood out that we're going to address immediately:
 
-### We missed some fairly likely scenarios in our integration specs
-
+** We missed some fairly likely scenarios in our integration specs **<br/>
 Testing use cases that involve offline > online transistions can be tough and we missed a particular case that had been tested to death manually when we first implemented. However, a point upgrade of one library introduced a regression that broke this use case. Our automated specs missed it.
 
 Thankfully, [Appium 1.0](http://appium.io/) made testing cases like this a whole lot easier so we can fix it but this shows that even with a motivated team, it's easy to miss things if the friction to testing is high.
 
 More broadly, we've noticed that our integration specs cover a lot of micro use cases instead of more closely simulating a user interacting with the app. Our plan is to simplify with full stack pathways through the app instead of individually specing each item of functionality seperately.
 
-### Our internal staff testers weren't interested until we got approval
-
+** Our internal staff testers didn't really test until we got approval **<br/>
 One of the company's marketing people found the regression while testing after we announced App store approval. This was great but I was disappointed that we hadn't had more people testing against the beta builds that have been pushed out for the past few months. This week has been great for digging out bugs but many could have been spotted and dealt with weeks ago rather than just before launch.
 
 In an ideal world we'd be able to push out to a team of dedicated testers which may be a direction we'll go in. We'll probably also chat to the staff and see if there's any way we can make things easier for them to pick up during development.
