@@ -8,7 +8,7 @@ categories:
 
 ## In-app Purchase
 
-Turns out that we need to implement some form of in-app purchase on our app in order to get into the app store. It can be frustrating with Apple because, despite giving us this guidance, they cannot give us a clear 'yes' or 'no' in principal until we submit. Because of this we focused on a minimal implementation and have almost complete the work with a week left in our current sprint.
+Turns out that we need to implement some form of in-app purchase on our app in order to get into the app store. It can be frustrating with Apple because, despite giving us this guidance, they cannot give us a clear 'yes' or 'no' in principal until we submit. Because of this we focused on a minimal implementation and have almost completed the work with a week left in our current sprint.
 
 We used the [iOS In-App Purchase](https://github.com/j3k0/PhoneGap-InAppPurchase-iOS) plugin for Cordova/PhoneGap which works with both old and new receipt styles. Because we're targeting iOS 7, we don't need to have any server side components. Overall I've enjoyed digging into the IAP side of iOS dev - in particular the "Using Store Kit for In-App Purchases" video from [WWDC 2013](https://developer.apple.com/videos/wwdc/2013/) really solidified my understanding.
 
