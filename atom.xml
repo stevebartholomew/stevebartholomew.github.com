@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew: Programmer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2014-06-27T08:41:58+01:00</updated>
+  <updated>2014-06-29T09:58:25+01:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -12,6 +12,19 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[The Right Lines]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2014/06/29/the-right-lines/"/>
+    <updated>2014-06-29T09:49:00+01:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2014/06/29/the-right-lines</id>
+    <content type="html"><![CDATA[<p>I just pushed some code that fixed some fairly major issues I discussed in <a href="http://stephenbartholomew.co.uk/blog/2014/06/27/dev-diary-27th-june-2014/">Friday&#8217;s Dev Diary</a>. This amounted to about 4 hours work but it summed up to around 5 lines changed in production code.</p>
+
+<p>It would have been easy to jump in and start panic hacking.  However, most of that 4 hours was spent manual testing, proving/debunking assumptions, reading documentation, experimenting etc.</p>
+
+<p>I&#8217;m reminded that so much of programming, like any other craft, is about knowing the <em>right</em> lines to write - not how many.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dev Diary - 27th June 2014]]></title>
