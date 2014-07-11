@@ -1,0 +1,33 @@
+---
+layout: post
+title: "Dev Diary - 11th July 2014"
+date: 2014-07-11 17:17
+comments: true
+categories:
+---
+
+## Javascript Debugging Joy
+
+I'm way late to the party on this - I just discovered the `debugger` command: [debugger - JavaScript | MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger)
+
+You get an analysis of the current callstack and can interact with the app within the scope `debugger` was called.
+
+After spending quite a bit of time in Android studio where this is a common part of debugging workflow, this is a very welcome addition to my toolset.
+
+## Android
+
+Speaking of Android, I've been working my way through the [Big Nerd Ranch's Android book](http://www.bignerdranch.com/we-write/android-programming) in preparation for starting development of a side project I'm kicking off in the next few weeks.
+
+Despite the [positive parts of Xamerin](/blog/2014/04/25/dev-diary-25th-april-2014/), I've chosen to go native.  I'm keen to learn Java and the native Android platform so it's a much better choice for me right now.
+
+So far I'm really enjoying Java. As [Sean Cassidy points out](http://blog.existentialize.com/better-java.html) Java might not be as bad as many would have you think.
+
+## Old Code
+
+I was amused and slight embarrassed to come across some old open source code of mine from 2002: [PHP MySQL Search Class](http://code.activestate.com/recipes/125901-php-mysql-search-class/).
+
+My lack of competence with SQL shines through as I pull down the _entire table_ of data and do the filtering in PHP.
+
+## Watching
+
+Philip Roberts's talk on the [Javascript runtime](http://vimeo.com/96425312) is required viewing for anyone working with Javascript.
