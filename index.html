@@ -9,7 +9,7 @@
   <meta name="author" content="Stephen Bartholomew">
 
   
-  <meta name="description" content="I just pushed some code that fixed some fairly major issues I discussed in Friday&#8217;s Dev Diary. This amounted to about 4 hours work but it &hellip;">
+  <meta name="description" content="Javascript Debugging Joy I&#8217;m way late to the party on this - I just discovered the debugger command: debugger - JavaScript | MDN You get an &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -50,6 +50,66 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2014/07/11/dev-diary-11th-july-2014/">Dev Diary - 11th July 2014</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-07-11T17:17:00+01:00" pubdate data-updated="true">Jul 11<span>th</span>, 2014</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Javascript Debugging Joy</h2>
+
+<p>I&#8217;m way late to the party on this - I just discovered the <code>debugger</code> command: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/debugger">debugger - JavaScript | MDN</a></p>
+
+<p>You get an analysis of the current callstack and can interact with the app within the scope <code>debugger</code> was called.</p>
+
+<p>After spending quite a bit of time in Android studio where this is a common part of debugging workflow, this is a very welcome addition to my toolset.</p>
+
+<h2>Android</h2>
+
+<p>Speaking of Android, I&#8217;ve been working my way through the <a href="http://www.bignerdranch.com/we-write/android-programming">Big Nerd Ranch&#8217;s Android book</a> in preparation for starting development of a side project I&#8217;m kicking off in the next few weeks.</p>
+
+<p>Despite the <a href="/blog/2014/04/25/dev-diary-25th-april-2014/">positive parts of Xamerin</a>, I&#8217;ve chosen to go native.  I&#8217;m keen to learn Java and the native Android platform so it&#8217;s a much better choice for me right now.</p>
+
+<p>So far I&#8217;m really enjoying Java. As <a href="http://blog.existentialize.com/better-java.html">Sean Cassidy points out</a> Java might not be as bad as many would have you think.</p>
+
+<h2>Old Code</h2>
+
+<p>I was amused and slight embarrassed to come across some old open source code of mine from 2002: <a href="http://code.activestate.com/recipes/125901-php-mysql-search-class/">PHP MySQL Search Class</a>.</p>
+
+<p>My lack of competence with SQL shines through as I pull down the <em>entire table</em> of data and do the filtering in PHP.</p>
+
+<h2>Watching</h2>
+
+<p>Philip Roberts&#8217;s talk on the <a href="http://vimeo.com/96425312">Javascript runtime</a> is required viewing for anyone working with Javascript.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -121,7 +181,7 @@
 
   <div class="entry-content"><h2>App Store Approval</h2>
 
-<p>We finally got App store approval! We had low expections about Apple&#8217;s turnaround but our resubmission was approved within a few hours. After the various rejections, subsequent unplanned development and uncertainty, this has been a huge relief for the team. Of course we&#8217;re a few days from actual users getting their hands on it - then the real fun starts&#8230;</p>
+<p>We finally got App store approval! We had low expectations about Apple&#8217;s turnaround but our resubmission was approved within a few hours. After the various rejections, subsequent unplanned development and uncertainty, this has been a huge relief for the team. Of course we&#8217;re a few days from actual users getting their hands on it - then the real fun starts&#8230;</p>
 
 <h2>More Testing</h2>
 
@@ -141,7 +201,7 @@ One of the company&#8217;s marketing people found the regression while testing a
 
 <h2>Charles Proxy</h2>
 
-<p>One bug that I found occured when the device lost connection during a download of data. The app should cope with this but I found myself in a constant loading state while testing the app on a train. I used <a href="http://www.charlesproxy.com/">Charles proxy</a> to try different scenarios after reading <a href="http://codewithchris.com/tutorial-using-charles-proxy-with-your-ios-development-and-http-debugging/">this post</a>. I&#8217;d like to try building automated specs (given our experience above) but in the meantime this has been invaluable for throwing different situations at the app to try and break it.</p>
+<p>One bug that I found occurred when the device lost connection during a download of data. The app should cope with this but I found myself in a constant loading state while testing the app on a train. I used <a href="http://www.charlesproxy.com/">Charles proxy</a> to try different scenarios after reading <a href="http://codewithchris.com/tutorial-using-charles-proxy-with-your-ios-development-and-http-debugging/">this post</a>. I&#8217;d like to try building automated specs (given our experience above) but in the meantime this has been invaluable for throwing different situations at the app to try and break it.</p>
 </div>
   
   
@@ -597,64 +657,6 @@ One of the company&#8217;s marketing people found the regression while testing a
 <p>The past few Javascript Jabber episodes have really stood out for me. <a href="https://twitter.com/rockbot">Raquel Vélez</a> talking about <a href="http://javascriptjabber.com/103-jsj-robots-with-raquel-velez/">robotics and Javascript</a> was fantastic and really inspiring to get out and play with something other than pure code.</p>
 
 <p>The Incomparable have rebooted their podcast <a href="http://www.theincomparable.com/teevee/">Teevee</a>. At there moment they&#8217;re talking about Game of Thrones.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/04/11/dev-diary-11th-april-2014/">Dev Diary - 11th April 2014</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-04-11T13:20:00+01:00" pubdate data-updated="true">Apr 11<span>th</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><h2>This week</h2>
-
-<p>Super excited that the project I&#8217;m on a work is shipping next week!</p>
-
-<p>Looking back I&#8217;m pretty impressed with what we’ve achieved so far.  We&#8217;ve used open source tech well but we’re still only a small team.  Over the coming weeks we&#8217;ll be shipping an app on both iOS and Android that hooks up to our existing backend systems - then the real work starts!</p>
-
-<hr />
-
-<p>We were lucky enough to not be vulnerable to heartbleed but I&#8217;ve really enjoyed digging into the bug.  There’s a great rundown of the specifics <a href="http://blog.existentialize.com/diagnosis-of-the-openssl-heartbleed-bug.html">here</a>.</p>
-
-<p>I’ve always worked in memory managed languages, but my current C studying has just hit memory management. I was pleased to be able to keep up!</p>
-
-<h2>Reading</h2>
-
-<p>I&#8217;ve finally picked up <a href="http://sicpebook.wordpress.com/">SICP</a>. Not too far in yet but it’s great to be digging deeper into compsci.</p>
-
-<p>On my commute I’m still working through the &#8221;<a href="http://c.learncodethehardway.org/">Learn C the Hard Way</a>&#8221; which has been a lot of fun.  I have to confess that I’ve started copy/pasting the code but that is meaning I have more time for the ‘Extra Credit’ exercises.</p>
-
-<p>My son is obsessed with Minecraft so I’ve also picked up the <a href="http://pragprog.com">pragprog</a>&#8217;s <a href="http://pragprog.com/book/ahmine/learn-to-program-with-minecraft-plugins">book on creating plugins for the game</a>. It’s giving me a light introduction to Java and has been good to pair with a 5 year old.</p>
-
-<h2>Listening</h2>
-
-<p>Related to the Minecraft obsession, I’ve found the “Volume Alpha” by C418 really good for coding.</p>
 </div>
   
   
