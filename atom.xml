@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew: Programmer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2015-03-01T18:50:26+00:00</updated>
+  <updated>2015-03-01T20:49:26+00:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -575,6 +575,11 @@ One of the company&#8217;s marketing people found the regression while testing a
 <!-- more -->
 
 
+
+
+<p><em><strong>Updated 1st March 2015:</strong> fixed typos</em></p>
+
+
 <h2>The Main Players</h2>
 
 <h3>Appium</h3>
@@ -593,7 +598,7 @@ One of the company&#8217;s marketing people found the regression while testing a
 
 <h3>Your app</h3>
 
-<p>I&#8217;m assuming you&#8217;re working on a hybrid app using the latest Cordova (3.1.x at the time of writing).</p>
+<p>I&#8217;m assuming you&#8217;re working on a hybrid app using the latest Cordova (4.x at the time of last review).</p>
 
 <h2>Setting up</h2>
 
@@ -618,10 +623,10 @@ One of the company&#8217;s marketing people found the regression while testing a
 <p>Next, you&#8217;ll need to install a few node modules:</p>
 
 <figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
-</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g cucumberjs selenium-webdriver</span></code></pre></td></tr></table></div></figure>
+</pre></td><td class='code'><pre><code class=''><span class='line'>npm install -g cucumber selenium-webdriver</span></code></pre></td></tr></table></div></figure>
 
 
-<p>You can also use <a href="http://">Grunt</a> to manage these modules. The <code>grunt-cucumber</code> has various tasks for running your specs.</p>
+<p>You can also use <a href="http://gruntjs.com">Grunt</a> to manage these modules. The <code>grunt-cucumber</code> has various tasks for running your specs.</p>
 
 <p>You&#8217;ll need to setup a few directories in your app yourself:</p>
 
@@ -666,7 +671,7 @@ One of the company&#8217;s marketing people found the regression while testing a
 </span><span class='line'>  <span class="nx">withCapabilities</span><span class="p">({</span>
 </span><span class='line'>    <span class="nx">browserName</span><span class="o">:</span> <span class="s1">&#39;iOS&#39;</span><span class="p">,</span>
 </span><span class='line'>    <span class="nx">platform</span><span class="o">:</span>    <span class="s1">&#39;Mac&#39;</span><span class="p">,</span>
-</span><span class='line'>    <span class="nx">version</span><span class="o">:</span>     <span class="s1">&#39;7.0&#39;</span><span class="p">,</span>
+</span><span class='line'>    <span class="nx">version</span><span class="o">:</span>     <span class="s1">&#39;8.1&#39;</span><span class="p">,</span>
 </span><span class='line'>    <span class="nx">app</span><span class="o">:</span>         <span class="nx">appPath</span>
 </span><span class='line'>  <span class="p">}).</span>
 </span><span class='line'>  <span class="nx">usingServer</span><span class="p">(</span><span class="s1">&#39;http://localhost:4723/wd/hub&#39;</span><span class="p">).</span>
