@@ -12,6 +12,8 @@ If you come from the Ruby world, you may also be used to using Cucumber for inte
 
 <!-- more -->
 
+<p><em><strong>Updated 1st March 2015:</strong> fixed typos</em></p>
+
 ## The Main Players
 
 ### Appium
@@ -30,7 +32,7 @@ The web driver talks to any Seleinum-compatible REST-style API over HTTP. For ou
 
 ### Your app
 
-I'm assuming you're working on a hybrid app using the latest Cordova (3.1.x at the time of writing). 
+I'm assuming you're working on a hybrid app using the latest Cordova (4.x at the time of last review). 
 
 ## Setting up
 
@@ -55,10 +57,10 @@ to allow Appium to use UI Automation and the simulator.
 Next, you'll need to install a few node modules:
 
 ```
-npm install -g cucumberjs selenium-webdriver
+npm install -g cucumber selenium-webdriver
 ```
 
-You can also use [Grunt](http://) to manage these modules. The `grunt-cucumber` has various tasks for running your specs.
+You can also use [Grunt](http://gruntjs.com) to manage these modules. The `grunt-cucumber` has various tasks for running your specs.
 
 You'll need to setup a few directories in your app yourself:
 
@@ -81,7 +83,7 @@ var driver = new webdriver.Builder().
   withCapabilities({
     browserName: 'iOS',
     platform:    'Mac',
-    version:     '7.0',
+    version:     '8.1',
     app:         appPath
   }).
   usingServer('http://localhost:4723/wd/hub').
