@@ -9,7 +9,7 @@
   <meta name="author" content="Stephen Bartholomew">
 
   
-  <meta name="description" content="Work on the Reallyenglish mobile app is going well as the team prepares for the upcoming official release on Android. After working through bugs on &hellip;">
+  <meta name="description" content="Understanding Games I don&#8217;t play many games but Alto&#8217;s Adventure sparked my curiosity in games programming again. Games programming is &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -49,6 +49,68 @@
     <div id="content">
       <div class="blog-index">
   
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/blog/2015/03/01/dev-diary-1st-march-2015/">Dev Diary - 1st March 2015</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2015-03-01T18:49:00+00:00" pubdate data-updated="true">Mar 1<span>st</span>, 2015</time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><h2>Understanding Games</h2>
+
+<p>I don&#8217;t play many games but <a href="http://altosadventure.com">Alto&#8217;s Adventure</a> sparked my curiosity in games programming again.</p>
+
+<p>Games programming is quite a bit different from the programming I do day to day. I started taking a look at the amazing tutorials on <a href="http://unity3d.com/learn/tutorials/modules">Unity&#8217;s website</a> but I&#8217;d really like to get a grounding in the core concepts of what makes a game engine.</p>
+
+<p>In order to work through this, I started writing a basic games engine in Javascript. It handles rendering of basic game entities (i.e. boxes), very basic collision detection &amp; poorly implemented physics.</p>
+
+<p>I&#8217;ve put it on github: <a href="https://github.com/stevebartholomew/platformer">Platformer</a>.</p>
+
+<h2>Podcast App</h2>
+
+<p>Seeing the designs come together has been really exciting. Most of the basic feed syncing, episode display/details/play views and I&#8217;m now refining that core functionality.  Handling all the different states that episodes and related assets can be in has been challenging.  Spending some time getting good test coverage has helped though. I&#8217;ve made some fairly large refactors of various parts of the code base without much breakage.</p>
+
+<p>I&#8217;m starting to see areas that could be turned into libraries although I&#8217;m not really sure on the best way to do this in the Java/Android world. <a href="http://search.maven.org">Maven Central</a> seems to be the <a href="https://rubygems.org">Rubygems</a>/<a href="https://www.npmjs.com">npm</a> equivilent but it all seems to be way more complicated.  I&#8217;ll be doing some research on this in the near future.</p>
+
+<p>In particular, I&#8217;ll be looking to outsource the podcast feed parsing library. I consider it to have a reasonably easy-to-use API which might benefit others but I&#8217;m also keen to get input from a community for handling feed formats. Feed formatting is a constant pain as many differ and are often just plain wrong.</p>
+
+<h2>Hirgana Practice</h2>
+
+<p>This app came out of nowhere on a Sunday morning when I was considering the Hiragan practice app I&#8217;d been using. Many apps use the &#8216;flash card&#8217; style, showing you a character and asking you to choose from a list of Roman sounds - for example, for &#8220;ち&#8221; you would tap &#8220;chi&#8221;. This is problematic because it encourages you to &#8220;map&#8221; sounds to known English equivilents instead of internalising the sound itself.</p>
+
+<p>In classic programmer style, instead of just practicing, I wrote an app that plays the sound and you then write the character on screen. You then tap when you&#8217;re done and compare your character to the actual one.</p>
+
+<p>I lifted most of the drawing code from <a href="http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit">here</a> and translated to Swift.  I&#8217;m going to have a go at improving this using actual Bezier paths instead - I&#8217;ve been reading <a href="http://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164">this</a> to understand more.</p>
+
+<p>With a basic design in place I may release it in the coming weeks.</p>
+</div>
+  
+  
+
+
+    </article>
   
   
     <article>
@@ -640,52 +702,6 @@ One of the company&#8217;s marketing people found the regression while testing a
 
     </article>
   
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2014/05/02/dev-diary-2nd-may-2014/">Dev Diary - 2nd May 2014</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2014-05-02T07:42:00+01:00" pubdate data-updated="true">May 2<span>nd</span>, 2014</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>A little slow this week while we debate largely non-technical issues with Apple. Doubling-down on Android is the order of the week.</p>
-
-<hr />
-
-<p>On a more positive front we had a very successful deploy of a huge improvement to the most important part of our service. It was a multi-app deploy and has so far gone off without a hitch. This is how it <em>should</em> be of course but you can never be 100% until it&#8217;s in the wild. As well as <a href="http://twitter.com/morgan_randy">Randy&#8217;s</a> awesome code we also did quite a bit of manual testing and a detailed code review.</p>
-
-<h2>Listening</h2>
-
-<p><a href="https://twitter.com/glassbottommeg">Megan Fox</a> discussed game dev on this week&#8217;s <a href="http://www.rubyrogues.com">Ruby Rouges</a> which was low on Ruby but and interesting insight into an industry so different to the web dev I&#8217;m used to.</p>
-
-<p>I literally cried listening to <a href="https://twitter.com/ProfSaraSeager">Sara Seager</a> on <a href="http://storycollider.org/podcast/2014-04-30">Story collider</a>. The episode is funny, tragic but also beautifully inspiring - impressive for only 16 minutes.</p>
-</div>
-  
-  
-
-
-    </article>
-  
   <div class="pagination">
     
       <a class="prev" href="/blog/page/2/">&larr; Older</a>
@@ -698,7 +714,7 @@ One of the company&#8217;s marketing people found the regression while testing a
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2014 - Stephen Bartholomew -
+  Copyright &copy; 2015 - Stephen Bartholomew -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

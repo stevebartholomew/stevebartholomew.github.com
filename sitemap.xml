@@ -2,96 +2,100 @@
 <urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2012/04/01/todoist-part-1-the-todo/</loc>
-        <lastmod>2014-04-19T08:03:59+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>
             http://stephenbartholomew.co.uk/blog/2012/06/07/glass-bottles-and-the-law-of-demeter/
         </loc>
-        <lastmod>2014-04-19T08:03:59+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2013/11/05/building-sbgauge/</loc>
-        <lastmod>2014-04-19T08:03:59+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>
             http://stephenbartholomew.co.uk/blog/2013/12/14/automated-ui-testing-with-cucumber-for-cordova-phonegap-apps/
         </loc>
-        <lastmod>2014-04-19T08:03:59+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/04/07/iterate-imperfection/</loc>
-        <lastmod>2014-04-19T08:03:59+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/04/11/dev-diary-11th-april-2014/</loc>
-        <lastmod>2014-04-19T08:03:59+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/04/17/dev-diary-17th-april-2014/</loc>
-        <lastmod>2014-04-19T08:03:59+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/04/25/dev-diary-25th-april-2014/</loc>
-        <lastmod>2014-04-25T08:52:14+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/05/02/dev-diary-2nd-may-2014/</loc>
-        <lastmod>2014-05-02T08:06:54+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/05/09/dev-diary-9th-may-2014/</loc>
-        <lastmod>2014-05-09T08:00:38+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/05/09/notes-from-number-istdddead/</loc>
-        <lastmod>2014-05-09T17:08:04+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/05/16/dev-diary-16th-may-2014/</loc>
-        <lastmod>2014-05-16T08:57:18+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/06/06/dev-diary-6th-june-2014/</loc>
-        <lastmod>2014-06-27T07:33:43+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/06/27/dev-diary-27th-june-2014/</loc>
-        <lastmod>2014-07-11T17:19:19+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/06/29/the-right-lines/</loc>
-        <lastmod>2014-06-29T09:56:32+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/07/11/dev-diary-11th-july-2014/</loc>
-        <lastmod>2014-07-11T17:43:02+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>
             http://stephenbartholomew.co.uk/blog/2014/08/03/from-subtle-sexist-to-aspiring-feminist/
         </loc>
-        <lastmod>2014-08-03T22:39:39+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/2014/08/22/dev-diary-22nd-august-2014/</loc>
-        <lastmod>2014-08-22T12:59:47+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
+    </url>
+    <url>
+        <loc>http://stephenbartholomew.co.uk/blog/2015/03/01/dev-diary-1st-march-2015/</loc>
+        <lastmod>2015-03-01T18:50:26+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/archives/</loc>
-        <lastmod>2014-08-22T12:59:47+01:00</lastmod>
+        <lastmod>2015-03-01T18:50:26+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/blog/</loc>
-        <lastmod>2014-08-22T12:59:47+01:00</lastmod>
+        <lastmod>2015-03-01T18:50:26+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/hire-me/</loc>
-        <lastmod>2012-10-20T11:23:33+01:00</lastmod>
+        <lastmod>2014-11-19T16:06:50+00:00</lastmod>
     </url>
     <url>
         <loc>http://stephenbartholomew.co.uk/</loc>
-        <lastmod>2014-08-22T12:59:47+01:00</lastmod>
+        <lastmod>2015-03-01T18:50:26+00:00</lastmod>
     </url>
 </urlset>

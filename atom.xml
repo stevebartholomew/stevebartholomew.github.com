@@ -4,7 +4,7 @@
   <title><![CDATA[Stephen Bartholomew: Programmer]]></title>
   <link href="http://stephenbartholomew.co.uk/atom.xml" rel="self"/>
   <link href="http://stephenbartholomew.co.uk/"/>
-  <updated>2014-08-22T12:59:50+01:00</updated>
+  <updated>2015-03-01T18:50:26+00:00</updated>
   <id>http://stephenbartholomew.co.uk/</id>
   <author>
     <name><![CDATA[Stephen Bartholomew]]></name>
@@ -12,6 +12,41 @@
   </author>
   <generator uri="http://octopress.org/">Octopress</generator>
 
+  
+  <entry>
+    <title type="html"><![CDATA[Dev Diary - 1st March 2015]]></title>
+    <link href="http://stephenbartholomew.co.uk/blog/2015/03/01/dev-diary-1st-march-2015/"/>
+    <updated>2015-03-01T18:49:00+00:00</updated>
+    <id>http://stephenbartholomew.co.uk/blog/2015/03/01/dev-diary-1st-march-2015</id>
+    <content type="html"><![CDATA[<h2>Understanding Games</h2>
+
+<p>I don&#8217;t play many games but <a href="http://altosadventure.com">Alto&#8217;s Adventure</a> sparked my curiosity in games programming again.</p>
+
+<p>Games programming is quite a bit different from the programming I do day to day. I started taking a look at the amazing tutorials on <a href="http://unity3d.com/learn/tutorials/modules">Unity&#8217;s website</a> but I&#8217;d really like to get a grounding in the core concepts of what makes a game engine.</p>
+
+<p>In order to work through this, I started writing a basic games engine in Javascript. It handles rendering of basic game entities (i.e. boxes), very basic collision detection &amp; poorly implemented physics.</p>
+
+<p>I&#8217;ve put it on github: <a href="https://github.com/stevebartholomew/platformer">Platformer</a>.</p>
+
+<h2>Podcast App</h2>
+
+<p>Seeing the designs come together has been really exciting. Most of the basic feed syncing, episode display/details/play views and I&#8217;m now refining that core functionality.  Handling all the different states that episodes and related assets can be in has been challenging.  Spending some time getting good test coverage has helped though. I&#8217;ve made some fairly large refactors of various parts of the code base without much breakage.</p>
+
+<p>I&#8217;m starting to see areas that could be turned into libraries although I&#8217;m not really sure on the best way to do this in the Java/Android world. <a href="http://search.maven.org">Maven Central</a> seems to be the <a href="https://rubygems.org">Rubygems</a>/<a href="https://www.npmjs.com">npm</a> equivilent but it all seems to be way more complicated.  I&#8217;ll be doing some research on this in the near future.</p>
+
+<p>In particular, I&#8217;ll be looking to outsource the podcast feed parsing library. I consider it to have a reasonably easy-to-use API which might benefit others but I&#8217;m also keen to get input from a community for handling feed formats. Feed formatting is a constant pain as many differ and are often just plain wrong.</p>
+
+<h2>Hirgana Practice</h2>
+
+<p>This app came out of nowhere on a Sunday morning when I was considering the Hiragan practice app I&#8217;d been using. Many apps use the &#8216;flash card&#8217; style, showing you a character and asking you to choose from a list of Roman sounds - for example, for &#8220;ち&#8221; you would tap &#8220;chi&#8221;. This is problematic because it encourages you to &#8220;map&#8221; sounds to known English equivilents instead of internalising the sound itself.</p>
+
+<p>In classic programmer style, instead of just practicing, I wrote an app that plays the sound and you then write the character on screen. You then tap when you&#8217;re done and compare your character to the actual one.</p>
+
+<p>I lifted most of the drawing code from <a href="http://www.raywenderlich.com/18840/how-to-make-a-simple-drawing-app-with-uikit">here</a> and translated to Swift.  I&#8217;m going to have a go at improving this using actual Bezier paths instead - I&#8217;ve been reading <a href="http://code.tutsplus.com/tutorials/smooth-freehand-drawing-on-ios--mobile-13164">this</a> to understand more.</p>
+
+<p>With a basic design in place I may release it in the coming weeks.</p>
+]]></content>
+  </entry>
   
   <entry>
     <title type="html"><![CDATA[Dev Diary - 22nd August 2014]]></title>
